@@ -27,3 +27,8 @@ sed -ibak -b docker.exe -e 's/1\.19/1.17/g'
 
 But searching for `sed` in chocolatey is not so easy. Many deprecated packages out there. I've installed cygwin and patched it in a cygwin shell.
 
+## See also
+
+* https://github.com/docker/machine/issues/732
+* https://github.com/docker/docker/issues/11486
+
