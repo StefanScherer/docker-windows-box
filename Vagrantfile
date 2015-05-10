@@ -6,7 +6,8 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.require_version ">= 1.6.0"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |vpn|
-  vpn.vm.box      = "kensykora/windows_81"
+  #vpn.vm.box      = "kensykora/windows_81"
+  vpn.vm.box      = "windows_7"
   vpn.vm.communicator = "winrm"
 
   vpn.vm.provider "virtualbox" do |vb|
@@ -27,6 +28,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |vpn|
     end
   end
 
-  vpn.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
+  # vpn.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
 
 end
