@@ -28,6 +28,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |vpn|
     end
   end
 
+  # provisioning does not work as VirtualBox disconnects all network interfaces
+  # open a powershell windows in the box and type c:\vagrant\scripts\provision.ps1
   # vpn.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
 
 end
