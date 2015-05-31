@@ -23,3 +23,29 @@ If provisioning fails, just open a PowerShell window in the box and run
 ```
 
 from inside the VM and then you have `docker-machine.exe` and `docker.exe` installed.
+
+## Translate envs
+
+The `docker-machine env dev` output is unixish and you have to translate it
+
+```
+export DOCKER_TLS_VERIFY=1
+export DOCKER_CERT_PATH="C:\Users\vagrant\.docker\machine\machines\dev"
+export DOCKER_HOST=tcp://192.168.99.100:2376
+```
+
+to powershell
+
+```
+$ENV:DOCKER_TLS_VERIFY=1
+$ENV:DOCKER_CERT_PATH="C:\Users\vagrant\.docker\machine\machines\dev"
+$ENV:DOCKER_HOST="tcp://192.168.99.100:2376"
+```
+
+or to cmd.exe
+
+```
+set DOCKER_TLS_VERIFY=1
+set DOCKER_CERT_PATH="C:\Users\vagrant\.docker\machine\machines\dev"
+set DOCKER_HOST=tcp://192.168.99.100:2376
+```
