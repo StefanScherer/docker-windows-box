@@ -5,14 +5,14 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.require_version ">= 1.6.0"
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |vpn|
-  #vpn.vm.box      = "kensykora/windows_81"
-  vpn.vm.box      = "windows_7"
-  vpn.vm.communicator = "winrm"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+#  config.vm.box          = "boxcutter/eval-win10x64-enterprise-nocm"
+  config.vm.box          = "windows_10"
+  config.vm.communicator = "winrm"
 
-  vpn.vm.provider "virtualbox" do |vb|
+  config.vm.provider "virtualbox" do |vb|
     vb.gui = true
-    vb.memory = 768
+    vb.memory = 1024
     vb.cpus = 1
     vb.customize ["modifyvm", :id, "--vram", "32"]
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
@@ -20,16 +20,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |vpn|
   end
 
   ["vmware_fusion", "vmware_workstation"].each do |provider|
-    vpn.vm.provider provider do |v, override|
+    config.vm.provider provider do |v, override|
       v.gui = true
-      v.vmx["memsize"] = "2048"
+      v.vmx["memsize"] = "4096"
       v.vmx["numvcpus"] = "2"
       v.vmx["vhv.enable"] = "TRUE"
+      v.vmx["hypervisor.cpuid.v0"] = "FALSE"
     end
   end
 
-  # provisioning does not work as VirtualBox disconnects all network interfaces
-  # open a powershell windows in the box and type c:\vagrant\scripts\provision.ps1
-  # vpn.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
-
+  config.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
+#  config.vm.provision "reload"
+#  config.vm.provision "shell", path: "scripts/setup-hyperv.ps1", privileged: false
 end

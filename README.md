@@ -1,10 +1,15 @@
 # docker-windows-box
 
 This is a Vagrant box to test `docker-machine` on Windows.
+After provisioning the box has the following tools installed:
 
-**This is a work in progress as VirtualBox provisioning fails while `vagrant up` at the moment.**
+* Chocolatey
+* git command line
+* ssh client
+* docker 1.8.1 client
+* docker-machine 0.4.0 binary
 
-Tested with VMware Fusion 6.
+Tested with VMware Fusion 7.
 
 ## Build the box
 
@@ -12,17 +17,18 @@ Tested with VMware Fusion 6.
 vagrant up --provider vmware_fusion
 ```
 
-## Provision from inside the VM
+## Working with SSH and GitHub
 
-Open a powershell terminal window.
+The installed git package also has an SSH client. So you can use your SSH key
+to clone GitHub repos. To avoid entering your passphrase again and again you
+can start the ssh-agent.exe with the following commnands
 
-If provisioning fails, just open a PowerShell window in the box and run
-
+```bash
+start-ssh-agent.cmd
+ssh-add %USERPROFILE%\.ssh\id_rsa
 ```
-\vagrant\scripts\provision.ps1
-```
 
-from inside the VM and then you have `docker-machine.exe` and `docker.exe` installed.
+Now you can work with git as your are used on Mac and Linux ;-)
 
 ## Translate envs
 
