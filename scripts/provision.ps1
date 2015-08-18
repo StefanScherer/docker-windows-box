@@ -6,10 +6,12 @@ choco install -y git -params "/GitAndUnixToolsOnPath"
 
 # install docker tools
 choco install -y docker -version 1.8.1
+choco install -y docker-machine -version 0.4.1
 
-choco install -y docker-machine -version 0.3.0
-curl -kL -o c:\ProgramData\chocolatey\bin\docker-machine.exe https://github.com/docker/machine/releases/download/v0.4.0/docker-machine_windows-amd64.exe
-
+# Windows 10: you could also use builtin cmdlets
+# Get-PackageProvider -Name chocolatey -forcebootstrap
+# Install-Package docker -force
+# Install-Package docker-machine -force
 
 # install hyper-v
 # Install-WindowsFeature -name hyper-v -IncludeManagementTools
