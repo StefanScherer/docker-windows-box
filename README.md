@@ -7,9 +7,10 @@ After provisioning the box has the following tools installed:
 * git command line
 * ssh client
 * docker 1.8.1 client
-* docker-machine 0.4.0 binary
+* docker-machine 0.4.1 binary
+* VirtualBox 5.0.2
 
-Tested with VMware Fusion 7.
+Tested with VMware Fusion 7.1.2.
 
 ## Build the box
 
@@ -30,28 +31,37 @@ ssh-add %USERPROFILE%\.ssh\id_rsa
 
 Now you can work with git as your are used on Mac and Linux ;-)
 
-## Translate envs
+## Create a docker machine
 
-The `docker-machine env dev` output is unixish and you have to translate it
-
-```
-export DOCKER_TLS_VERIFY=1
-export DOCKER_CERT_PATH="C:\Users\vagrant\.docker\machine\machines\dev"
-export DOCKER_HOST=tcp://192.168.99.100:2376
-```
-
-to powershell
+VirtualBox is already installed in this VM, so we can just create a new Docker machine with
 
 ```
-$ENV:DOCKER_TLS_VERIFY=1
-$ENV:DOCKER_CERT_PATH="C:\Users\vagrant\.docker\machine\machines\dev"
-$ENV:DOCKER_HOST="tcp://192.168.99.100:2376"
+docker-machine create -d virtualbox dev
 ```
 
-or to cmd.exe
+### Set the environment variables
+
+Depending on the shell you are using, set the environment variables to your new Docker machine with
+
+### powershell
 
 ```
-set DOCKER_TLS_VERIFY=1
-set DOCKER_CERT_PATH="C:\Users\vagrant\.docker\machine\machines\dev"
-set DOCKER_HOST=tcp://192.168.99.100:2376
+docker-machine env --shell=powershell dev | Invoke-Expression
 ```
+
+### cmd.exe shell
+
+```
+FOR /f "tokens=*" %i IN ('docker-machine env --shell=cmd dev') DO %i
+```
+
+## Run docker containers
+
+Now you can access the Docker machine and run commands with the Windows docker client.
+
+```
+docker version
+docker info
+```
+
+Or run a container...
