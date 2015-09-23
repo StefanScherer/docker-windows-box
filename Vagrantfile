@@ -6,8 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.require_version ">= 1.6.0"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-#  config.vm.box          = "boxcutter/eval-win10x64-enterprise-nocm"
-  config.vm.box          = "windows_10"
+  config.vm.box          = "windows_2016_docker"
   config.vm.communicator = "winrm"
 
   config.vm.provider "virtualbox" do |vb|

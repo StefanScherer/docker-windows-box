@@ -4,9 +4,14 @@ iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.p
 # install git + ssh
 choco install -y git -params "/GitAndUnixToolsOnPath"
 
-# install docker tools
-choco install -y docker -version 1.8.1
-choco install -y docker-machine -version 0.4.1
+# Windows 2016 TP3: update to latest docker.exe
+stop-service docker
+wget https://master.dockerproject.org/windows/amd64/docker.exe -outfile C:\windows\system32\docker.exe
+start-service docker
+
+# Windows 10: install docker tools
+# choco install -y docker -version 1.8.1
+# choco install -y docker-machine -version 0.4.1
 
 # Windows 10: you could also use builtin cmdlets
 # Get-PackageProvider -Name chocolatey -forcebootstrap
@@ -18,10 +23,10 @@ choco install -y docker-machine -version 0.4.1
 # dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All /NoRestart
 
 # enable UAC
-Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -Value 1
+# Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -Value 1
 
 # alternatives:
-choco install -y virtualbox
+# choco install -y virtualbox
 # choco install -y vmwareworkstation
 
 # setx CYGWIN nodosfilewarning
