@@ -28,6 +28,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.provider "vmware_fusion" do |v|
+    v.vmx["gui.fitguestusingnativedisplayresolution"] = "TRUE"
+    v.vmx["mks.enable3d"] = "TRUE"
+    v.vmx["mks.forceDiscreteGPU"] = "TRUE"
+    v.vmx["gui.fullscreenatpoweron"] = "TRUE"
+    v.vmx["gui.viewmodeatpoweron"] = "fullscreen"
+    v.vmx["gui.lastPoweredViewMode"] = "fullscreen"
+    v.vmx["sound.startconnected"] = "TRUE"
+    v.vmx["sound.present"] = "TRUE"
+    v.vmx["sound.autodetect"] = "TRUE"
+  end
+
   config.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
 #  config.vm.provision "reload"
 #  config.vm.provision "shell", path: "scripts/setup-hyperv.ps1", privileged: false
