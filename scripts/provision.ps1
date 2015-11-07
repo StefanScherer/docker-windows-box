@@ -6,12 +6,14 @@ choco install -y git -params "/GitAndUnixToolsOnPath"
 
 # Windows 2016 TP3: update to latest docker.exe
 stop-service docker
+copy-item C:\windows\system32\docker.exe C:\windows\system32\docker-orig.exe
 wget https://master.dockerproject.org/windows/amd64/docker.exe -outfile C:\windows\system32\docker.exe
 start-service docker
 
 # Windows 10: install docker tools
-# choco install -y docker -version 1.8.1
-# choco install -y docker-machine -version 0.4.1
+# choco install -y docker -version 1.9.0
+choco install -y docker-machine -version 0.5.0
+choco install -y docker-compose -version 1.5.0
 
 # Windows 10: you could also use builtin cmdlets
 # Get-PackageProvider -Name chocolatey -forcebootstrap
