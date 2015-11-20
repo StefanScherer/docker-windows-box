@@ -20,8 +20,8 @@ choco install -y git -params "/GitAndUnixToolsOnPath"
 
 # Windows 10: install docker tools
 # choco install -y docker -version 1.9.0
-choco install -y docker-machine -version 0.5.0
-choco install -y docker-compose -version 1.5.0
+choco install -y docker-machine -version 0.5.1
+choco install -y docker-compose -version 1.5.1
 
 # Windows 10: you could also use builtin cmdlets
 # Get-PackageProvider -Name chocolatey -forcebootstrap
