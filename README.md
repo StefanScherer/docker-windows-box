@@ -19,6 +19,15 @@ Tested with VMware Fusion 7.1.3 on a MacBookPro with Retina display. The Vagrant
 
 If you don't have the Vagrant `windows_2016_docker` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
 
+To build the base box you have to run these commands on your host machine:
+
+```
+git clone https://github.com/StefanScherer/packer-windows
+cd packer-windows
+packer build --only=vmware-iso windows_2016_docker.json
+vagrant box add windows_2016_docker windows_2016_docker_vmware.box
+```
+
 ## Spin up the box
 
 To start the VM with [Vagrant](https://vagrantup.com) run this command
