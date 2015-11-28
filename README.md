@@ -1,18 +1,27 @@
 # docker-windows-box
 
-This is a Vagrant box to test `docker-machine` on Windows.
+This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016 TP4.
+
+![](images/tp4.png)
+
 After provisioning the box has the following tools installed:
 
+* docker TP4 engine and client
+* docker-machine 0.5.1
+* docker-compose 1.5.1
 * Chocolatey
 * git command line
 * ssh client
-* docker 1.8.1 client
-* docker-machine 0.4.1 binary
-* VirtualBox 5.0.2
 
-Tested with VMware Fusion 7.1.2.
+Tested with VMware Fusion 7.1.3 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
 
-## Build the box
+## Get the base box
+
+If you don't have the Vagrant `windows_2016_docker` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
+
+## Spin up the box
+
+To start the VM with [Vagrant](https://vagrantup.com) run this command
 
 ```bash
 vagrant up --provider vmware_fusion
@@ -31,37 +40,23 @@ ssh-add %USERPROFILE%\.ssh\id_rsa
 
 Now you can work with git as your are used on Mac and Linux ;-)
 
-## Create a docker machine
+## Create docker container images
 
-VirtualBox is already installed in this VM, so we can just create a new Docker machine with
-
-```
-docker-machine create -d virtualbox dev
-```
-
-### Set the environment variables
-
-Depending on the shell you are using, set the environment variables to your new Docker machine with
-
-### powershell
+You may clone my [dockerfiles-windows](https://github.com/StefanScherer/dockerfiles-windows) repo and create some container images.
 
 ```
-docker-machine env --shell=powershell dev | Invoke-Expression
+git clone https://github.com/StefanScherer/dockerfiles-windows
+cd dockerfiles-windows
+cd node
+.\build.bat
 ```
 
-### cmd.exe shell
+## Test the nightly docker engine
+
+You can update the Docker Engine with the script
 
 ```
-FOR /f "tokens=*" %i IN ('docker-machine env --shell=cmd dev') DO %i
+C:\vagrant\scripts\update-nightly-docker.ps1
 ```
 
-## Run docker containers
-
-Now you can access the Docker machine and run commands with the Windows docker client.
-
-```
-docker version
-docker info
-```
-
-Or run a container...
+This will stop the Docker service, download the nightly build from https://master.dockerproject.org and restart the service.
