@@ -36,17 +36,6 @@ To start the VM with [Vagrant](https://vagrantup.com) run this command
 vagrant up --provider vmware_fusion
 ```
 
-## Working with SSH and GitHub
-
-The installed git package also has an SSH client. So you can use your SSH key
-to clone GitHub repos. To avoid entering your passphrase again and again you
-can start the ssh-agent.exe with the following commnands
-
-```bash
-start-ssh-agent.cmd
-ssh-add %USERPROFILE%\.ssh\id_rsa
-```
-
 Now you can work with git as your are used on Mac and Linux ;-)
 
 ## Create docker container images
