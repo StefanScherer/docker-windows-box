@@ -3,10 +3,10 @@
 
 VAGRANTFILE_API_VERSION = "2"
 
-Vagrant.require_version ">= 1.6.0"
+Vagrant.require_version ">= 1.7.4"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box          = "windows_2016_tp4"
+  config.vm.box          = "windows_2016_docker"
   config.vm.communicator = "winrm"
 
   ["vmware_fusion", "vmware_workstation"].each do |provider|
