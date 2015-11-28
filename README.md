@@ -58,3 +58,14 @@ C:\vagrant\scripts\update-nightly-docker.ps1
 ```
 
 This will stop the Docker service, download the nightly build from https://master.dockerproject.org and restart the service.
+
+## Use Vagrant to control your box
+
+From your host control your Vagrant box with the usual Vagrant workflow:
+
+* vagrant up
+* vagrant halt
+* vagrant destroy -f
+* vagrant snap take
+* vagrant snap rollback
+* ...
