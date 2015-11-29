@@ -15,7 +15,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       v.vmx["memsize"] = "4096"
       v.vmx["numvcpus"] = "2"
       v.vmx["vhv.enable"] = "TRUE"
-      v.vmx["virtualhw.version"] = "11"
       v.enable_vmrun_ip_lookup = false
     end
   end
