@@ -19,6 +19,8 @@ Tested with VMware Fusion 7.1.3 on a MacBookPro with Retina display. The Vagrant
 
 ## Get the base box
 
+First register to [evaluate Windows 2016 TP4](https://technet.microsoft.com/de-de/evalcenter/dn781243.aspx), but you don't need to download the ISO manually.
+
 If you don't have the Vagrant `windows_2016_docker` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
 
 To build the base box you have to run these commands on your host machine:
