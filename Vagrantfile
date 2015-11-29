@@ -30,6 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.vmx["sound.startconnected"] = "TRUE"
     v.vmx["sound.present"] = "TRUE"
     v.vmx["sound.autodetect"] = "TRUE"
+    v.vmx["virtualhw.version"] = "11"
   end
 
   config.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
