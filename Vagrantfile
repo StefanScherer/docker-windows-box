@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       v.vmx["memsize"] = "4096"
       v.vmx["numvcpus"] = "2"
       v.vmx["vhv.enable"] = "TRUE"
-      v.vmx["hypervisor.cpuid.v0"] = "FALSE"
+      v.vmx["virtualhw.version"] = "11"
       v.enable_vmrun_ip_lookup = false
     end
   end
@@ -30,8 +30,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.vmx["sound.startconnected"] = "TRUE"
     v.vmx["sound.present"] = "TRUE"
     v.vmx["sound.autodetect"] = "TRUE"
-    v.vmx["virtualhw.version"] = "11"
   end
 
-  config.vm.provision "shell", path: "scripts/provision.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/install-chocolatey.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/install-git.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/install-dockertools.ps1", privileged: false
+  #config.vm.provision "shell", path: "scripts/create-hyperv-linux-docker-machine.ps1", privileged: false
+  #config.vm.provision "shell", path: "scripts/update-nightly-docker.ps1", privileged: false
 end
