@@ -40,7 +40,7 @@ To start the VM with [Vagrant](https://vagrantup.com) run this command
 vagrant up --provider vmware_fusion
 ```
 
-Now you can work with git as your are used on Mac and Linux ;-)
+You only have to logout and login once to have the Docker tools in user vagrant's PATH. 
 
 ## Create some Windows Docker Container images
 
