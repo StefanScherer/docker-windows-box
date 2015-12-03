@@ -34,6 +34,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", path: "scripts/install-chocolatey.ps1", privileged: false
   config.vm.provision "shell", path: "scripts/install-git.ps1", privileged: false
   config.vm.provision "shell", path: "scripts/install-dockertools.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/install-posh-docker.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/install-posh-git.ps1", privileged: false
   #config.vm.provision "shell", path: "scripts/create-hyperv-linux-docker-machine.ps1", privileged: false
   #config.vm.provision "shell", path: "scripts/update-nightly-docker.ps1", privileged: false
 end

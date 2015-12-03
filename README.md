@@ -6,12 +6,14 @@ This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016
 
 After provisioning the box has the following tools installed:
 
-* docker TP4 engine and client
-* docker-machine 0.5.1
+* Docker TP4 engine and client
+* docker-machine 0.5.2
 * docker-compose 1.5.1
+* Docker Tab completion for PowerShell (posh-docker)
 * Chocolatey
-* git command line
-* ssh client
+* Git command line
+* Git Tab completion for PowerShell (posh-git)
+* SSH client
 
 Optionally you can create a Hyper-V Docker Linux machine and have a multi architecture experience in one VM.
 
@@ -40,7 +42,7 @@ To start the VM with [Vagrant](https://vagrantup.com) run this command
 vagrant up --provider vmware_fusion
 ```
 
-You only have to logout and login once to have the Docker tools in user vagrant's PATH. 
+You only have to logout and login once to have the Docker tools in user vagrant's PATH.
 
 ## Create some Windows Docker Container images
 
