@@ -19,6 +19,12 @@ Optionally you can create a Hyper-V Docker Linux machine and have a multi archit
 
 Tested with VMware Fusion 7.1.3 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
 
+You can learn and play a lot of scenarios with it:
+
+![](images/docker-windows-box.png)
+
+Future work will be a Docker Swarm with both Linux and Windows Docker Engines...
+
 ## Get the base box
 
 First register to [evaluate Windows 2016 TP4](https://technet.microsoft.com/de-de/evalcenter/dn781243.aspx), but you don't need to download the ISO manually.
