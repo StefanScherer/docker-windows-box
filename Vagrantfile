@@ -37,7 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", path: "scripts/install-atom.ps1", privileged: false
   config.vm.provision "shell", path: "scripts/set-dns.ps1", privileged: false
   config.vm.provision "shell", path: "scripts/insert-ssh-key.ps1", privileged: false
-  config.vm.provision "shell", path: "scripts/install-posh-docker.ps1", privileged: false
+  # config.vm.provision "shell", path: "scripts/install-posh-docker.ps1", privileged: false
   config.vm.provision "shell", path: "scripts/install-posh-git.ps1", privileged: false
   #config.vm.provision "shell", path: "scripts/create-hyperv-linux-docker-machine.ps1", privileged: false
   #config.vm.provision "shell", path: "scripts/update-nightly-docker.ps1", privileged: false
