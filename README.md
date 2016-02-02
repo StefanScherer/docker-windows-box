@@ -7,9 +7,9 @@ This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016
 After provisioning the box has the following tools installed:
 
 * Docker TP4 engine and client
-* docker-machine 0.5.5
+* docker-machine 0.5.6
 * docker-compose 1.5.2
-* Docker Tab completion for PowerShell (posh-docker)
+* (Docker Tab completion for PowerShell (posh-docker))
 * Chocolatey
 * Git command line
 * Git Tab completion for PowerShell (posh-git)
