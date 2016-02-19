@@ -1,3 +1,3 @@
 # install docker tools
-choco install -y docker-machine -version 0.5.6
-choco install -y docker-compose -version 1.5.2
+choco install -y docker-machine -version 0.6.0
+choco install -y docker-compose -version 1.6.0
