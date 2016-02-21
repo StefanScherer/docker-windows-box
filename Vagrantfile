@@ -31,6 +31,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.vmx["sound.autodetect"] = "TRUE"
   end
 
+  config.vm.provider "virtualbox" do |v|
+    v.gui = true
+    v.customize ["modifyvm", :id, "--memory", 4096]
+    v.customize ["modifyvm", :id, "--cpus", 2]
+    v.customize ["modifyvm", :id, "--vram", 128]
+    v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+    v.customize ["modifyvm", :id, "--accelerate3d", "on"]
+    v.customize ["modifyvm", :id, "--accelerate2dvideo", "on"]
+    v.linked_clone = true if Vagrant::VERSION =~ /^1.8/
+  end
+
   config.vm.provision "shell", path: "scripts/install-chocolatey.ps1", privileged: false
   config.vm.provision "shell", path: "scripts/install-git.ps1", privileged: false
   config.vm.provision "shell", path: "scripts/install-dockertools.ps1", privileged: false
