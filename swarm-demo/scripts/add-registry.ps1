@@ -1,6 +1,5 @@
 Write-Host "Add Registry to hosts"
-$ip = "192.168.48.11"
-$ip = "192.168.254.134"
+$ip = "192.168.38.100"
 Add-Content C:\Windows\system32\drivers\etc\hosts "`r`n$ip registry"
 
 Write-Host "Add Docker Registry"

@@ -40,7 +40,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box          = "boxcutter/ubuntu1404"
     config.vm.communicator = "ssh"
     config.vm.hostname = "registry"
-    config.vm.network :private_network, ip: "192.168.48.11", gateway: "192.168.48.1"
+    config.vm.network :private_network, ip: "192.168.38.100", gateway: "192.168.38.1"
     config.vm.provision "shell", path: "scripts/install-docker.sh"
     config.vm.provision "shell", path: "scripts/run-registry.sh"
     config.vm.provision "shell", path: "scripts/run-swarm-master.sh"
@@ -48,21 +48,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "sw-win-01" do |config|
     config.vm.hostname = "sw-win-01"
-    config.vm.network :private_network, ip: "192.168.48.21", gateway: "192.168.48.1"
+    config.vm.network :private_network, ip: "192.168.38.101", gateway: "192.168.38.1"
     config.vm.provision "shell", path: "scripts/add-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.ps1", privileged: false
   end
 
   config.vm.define "sw-win-02" do |config|
     config.vm.hostname = "sw-win-02"
-    config.vm.network :private_network, ip: "192.168.48.22", gateway: "192.168.48.1"
+    config.vm.network :private_network, ip: "192.168.38.102", gateway: "192.168.38.1"
     config.vm.provision "shell", path: "scripts/add-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.ps1", privileged: false
   end
 
   config.vm.define "sw-win-03" do |config|
     config.vm.hostname = "sw-win-03"
-    config.vm.network :private_network, ip: "192.168.48.23", gateway: "192.168.48.1"
+    config.vm.network :private_network, ip: "192.168.38.103", gateway: "192.168.38.1"
     config.vm.provision "shell", path: "scripts/add-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.ps1", privileged: false
   end
