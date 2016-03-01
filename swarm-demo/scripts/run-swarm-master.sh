@@ -1,5 +1,5 @@
 #!/bin/bash
-TOKEN=$(cat /vagrant/config/swarm-token)
+TOKEN=$(cat /vagrant/config/swarm-token | sed 's/\s//g')
 docker run -d -p 3375:2375 --restart=always swarm:1.1.0 manage "token://$TOKEN"
 
 echo "... Redirect Port"
