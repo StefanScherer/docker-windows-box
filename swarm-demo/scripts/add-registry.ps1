@@ -1,5 +1,6 @@
 Write-Host "Add Registry to hosts"
 $ip = "192.168.38.100"
+# I know this could be done with vagrant-hostmanager
 Add-Content C:\Windows\system32\drivers\etc\hosts "`r`n$ip registry"
 
 Write-Host "Add Docker Registry"
