@@ -47,7 +47,7 @@ and all the four VM's will be created.
 
 The storage of the private Docker Registry will be in the `registry-v2/docker` directory. On first start the first Windows Server tries to pull the `swarm` image from the private registry and will fail.
 
-Then the swarm image is bootstrapped from `bootstrap/swarm-1.1.0.gz` and then pulled to the private registry.
+Then the swarm image is bootstrapped from `bootstrap/swarm-1.1.0.gz` and then pushed to the private registry.
 
 From then on building another Windows Server the swarm image is pulled from `registry:5000/swarm:1.1.0`.
 
