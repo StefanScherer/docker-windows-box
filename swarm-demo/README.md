@@ -2,6 +2,8 @@
 
 This is a test setup using Vagrant with VirtualBox to demonstrate a Windows Docker Swarm with a private (insecure) registry.
 
+![Windows Docker Swarm demo](images/windows_swarm_demo.png)
+
 ## Vagrant boxes
 
 There are four VM's with the following internal network and IP addresses:
