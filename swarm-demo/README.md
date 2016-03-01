@@ -6,10 +6,13 @@ This is a test setup using Vagrant with VirtualBox to demonstrate a Windows Dock
 
 There are four VM's with the following internal network and IP addresses:
 
-* registry - 192.168.38.100
-* sw-win-01 - 192.168.38.101
-* sw-win-02 - 192.168.38.102
-* sw-win-03 - 192.168.38.103
+| VM | IP address | Memory |
+| registry - 192.168.38.100 | 1GB |
+| sw-win-01 | 192.168.38.101 | 2GB |
+| sw-win-02 | 192.168.38.102 | 2GB |
+| sw-win-03 | 192.168.38.103 | 2GB |
+
+Depending on your host's memory you can spin up one or more Windows Server VM's.
 
 ### registry
 
