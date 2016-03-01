@@ -96,6 +96,10 @@ Now run your first busybox container with
 docker run -it busybox uname -a
 ```
 
+## Windows Docker Swarm demo
+
+See subdirectory [swarm-demo](swarm-demo/README.md)
+
 ## Use Vagrant to control your box
 
 From your host control your Vagrant box with the usual Vagrant workflow:
