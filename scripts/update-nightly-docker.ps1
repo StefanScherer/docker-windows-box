@@ -16,10 +16,10 @@ wget https://master.dockerproject.org/windows/amd64/docker.exe -outfile C:\windo
 start-service docker
 
 # tag the base images to latest if the tag got lost through update
-if ("$(docker images windowsservercore:latest | wc -l)" -eq "1") {
+if ("$(docker images windowsservercore:latest | measure)" -eq "1") {
   docker tag windowsservercore:10.0.10586.0 windowsservercore:latest
 }
-if ("$(docker images nanoserver:latest | wc -l)" -eq "1") {
+if ("$(docker images nanoserver:latest | measure)" -eq "1") {
   docker tag nanoserver:10.0.10586.0 nanoserver:latest
 }
 
