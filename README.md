@@ -2,7 +2,7 @@
 
 This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016 TP5.
 
-![](images/tp4.png)
+![](images/tp5.png)
 
 After provisioning the box has the following tools installed:
 
