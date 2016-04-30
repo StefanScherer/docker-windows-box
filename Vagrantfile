@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.require_version ">= 1.7.4"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box          = "windows_2016_docker"
+  config.vm.box          = "windows_2016_tp5_docker"
   config.vm.communicator = "winrm"
 
   ["vmware_fusion", "vmware_workstation"].each do |provider|
@@ -52,5 +52,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.provision "shell", path: "scripts/install-posh-docker.ps1", privileged: false
   config.vm.provision "shell", path: "scripts/install-posh-git.ps1", privileged: false
   #config.vm.provision "shell", path: "scripts/create-hyperv-linux-docker-machine.ps1", privileged: false
-  #config.vm.provision "shell", path: "scripts/update-nightly-docker.ps1", privileged: false
 end

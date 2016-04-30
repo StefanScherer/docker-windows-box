@@ -1,12 +1,12 @@
 # docker-windows-box
 
-This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016 TP4.
+This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016 TP5.
 
 ![](images/tp4.png)
 
 After provisioning the box has the following tools installed:
 
-* Docker TP4 engine and client
+* Docker TP5 engine and client
 * docker-machine 0.7.0
 * docker-compose 1.7.0
 * (Docker Tab completion for PowerShell (posh-docker))
@@ -17,7 +17,7 @@ After provisioning the box has the following tools installed:
 
 Optionally you can create a Hyper-V Docker Linux machine and have a multi architecture experience in one VM.
 
-Tested with VMware Fusion 7.1.3 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
+Tested with VMware Fusion Pro 8.1.1 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
 
 You can learn and play a lot of scenarios with it:
 
@@ -27,9 +27,9 @@ Future work will be a Docker Swarm with both Linux and Windows Docker Engines...
 
 ## Get the base box
 
-First register to [evaluate Windows 2016 TP4](https://technet.microsoft.com/de-de/evalcenter/dn781243.aspx), but you don't need to download the ISO manually.
+First register to [evaluate Windows 2016 TP5](https://technet.microsoft.com/de-de/evalcenter/dn781243.aspx), but you don't need to download the ISO manually.
 
-If you don't have the Vagrant `windows_2016_docker` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
+If you don't have the Vagrant `windows_2016_tp5_docker` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
 
 To build the base box you have to run these commands on your host machine:
 
@@ -37,7 +37,7 @@ To build the base box you have to run these commands on your host machine:
 git clone https://github.com/StefanScherer/packer-windows
 cd packer-windows
 packer build --only=vmware-iso windows_2016_docker.json
-vagrant box add windows_2016_docker windows_2016_docker_vmware.box
+vagrant box add windows_2016_tp5_docker windows_2016_docker_vmware.box
 ```
 
 ## Spin up the box
@@ -45,7 +45,7 @@ vagrant box add windows_2016_docker windows_2016_docker_vmware.box
 To start the VM with [Vagrant](https://vagrantup.com) run this command
 
 ```bash
-vagrant up --provider vmware_fusion
+vagrant up
 ```
 
 You only have to logout and login once to have the Docker tools in user vagrant's PATH.
@@ -66,7 +66,7 @@ cd node
 You can update the Docker Engine with the script
 
 ```
-C:\vagrant\scripts\update-nightly-docker.ps1
+C:\update-container-host.ps1
 ```
 
 This will stop the Docker service, download the nightly build from https://master.dockerproject.org and restart the service.
