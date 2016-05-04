@@ -32,7 +32,7 @@ The Docker Engine has connetion to the insecure registry running at `registry:50
 ## Create the boxes
 
 You need Vagrant, VirtualBox and the [windows_2016_docker](https://github.com/StefanScherer/packer-windows) Vagrant box on your host.
-This demo is tested on OSX with VirtualBox 5.0.14.
+This demo is tested on OSX with VirtualBox 5.0.20.
 
 First create a new swarm token and overwrite the file `config/swarm-token`.
 Then just run
@@ -45,11 +45,7 @@ and all the four VM's will be created.
 
 ## Registry storage
 
-The storage of the private Docker Registry will be in the `registry-v2/docker` directory. On first start the first Windows Server tries to pull the `swarm` image from the private registry and will fail.
-
-Then the swarm image is bootstrapped from `bootstrap/swarm-1.1.0.gz` and then pushed to the private registry.
-
-From then on building another Windows Server the swarm image is pulled from `registry:5000/swarm:1.1.0`.
+The storage of the private Docker Registry will be in the `registry-v2/docker` directory. On each Windows machine the Docker image `stefanscherer/swarm-windows:1.2.0` will be pulled.
 
 It is save to destroy all the VM's as your Docker images are stored on your host.
 Just recreate the registry and one of the Windows Servers and you can pull your own images again.
@@ -64,7 +60,8 @@ Containers: 3
  Running: 3
  Paused: 0
  Stopped: 0
-Images: 6
+Images: 9
+Server Version: swarm/1.2.0
 Role: primary
 Strategy: spread
 Filters: health, port, dependency, affinity, constraint
@@ -74,41 +71,35 @@ Nodes: 3
   └ Containers: 1
   └ Reserved CPUs: 0 / 2
   └ Reserved Memory: 0 B / 2.1 GiB
-  └ Labels: executiondriver=
- Name: Windows 1854
- Build: 1.10.0-dev 18c9fe0
- Default Isolation: process, kernelversion=10.0 10586 (10586.103.amd64fre.th2_release.160126-1819), operatingsystem=Windows Server 2016 Technical Preview 4, storagedriver=windowsfilter
+  └ Labels: executiondriver=, kernelversion=10.0 14300 (14300.1010.amd64fre.rs1_release_svc.160415-2143), operatingsystem=Windows Server 2016 Datacenter Technical Preview 5, storagedriver=windowsfilter
   └ Error: (none)
-  └ UpdatedAt: 2016-03-01T00:33:56Z
+  └ UpdatedAt: 2016-05-04T20:12:01Z
+  └ ServerVersion: 1.12.0-dev
  sw-win-02: 192.168.38.102:2375
   └ Status: Healthy
   └ Containers: 1
   └ Reserved CPUs: 0 / 2
   └ Reserved Memory: 0 B / 2.1 GiB
-  └ Labels: executiondriver=
- Name: Windows 1854
- Build: 1.10.0-dev 18c9fe0
- Default Isolation: process, kernelversion=10.0 10586 (10586.103.amd64fre.th2_release.160126-1819), operatingsystem=Windows Server 2016 Technical Preview 4, storagedriver=windowsfilter
+  └ Labels: executiondriver=, kernelversion=10.0 14300 (14300.1010.amd64fre.rs1_release_svc.160415-2143), operatingsystem=Windows Server 2016 Datacenter Technical Preview 5, storagedriver=windowsfilter
   └ Error: (none)
-  └ UpdatedAt: 2016-03-01T00:33:55Z
+  └ UpdatedAt: 2016-05-04T20:12:01Z
+  └ ServerVersion: 1.12.0-dev
  sw-win-03: 192.168.38.103:2375
   └ Status: Healthy
   └ Containers: 1
   └ Reserved CPUs: 0 / 2
   └ Reserved Memory: 0 B / 2.1 GiB
-  └ Labels: executiondriver=
- Name: Windows 1854
- Build: 1.10.0-dev 18c9fe0
- Default Isolation: process, kernelversion=10.0 10586 (10586.103.amd64fre.th2_release.160126-1819), operatingsystem=Windows Server 2016 Technical Preview 4, storagedriver=windowsfilter
+  └ Labels: executiondriver=, kernelversion=10.0 14300 (14300.1010.amd64fre.rs1_release_svc.160415-2143), operatingsystem=Windows Server 2016 Datacenter Technical Preview 5, storagedriver=windowsfilter
   └ Error: (none)
-  └ UpdatedAt: 2016-03-01T00:34:29Z
+  └ UpdatedAt: 2016-05-04T20:12:12Z
+  └ ServerVersion: 1.12.0-dev
 Plugins:
  Volume:
  Network:
-Kernel Version: 3.19.0-25-generic
+Kernel Version: 4.2.0-27-generic
 Operating System: linux
 Architecture: amd64
 CPUs: 6
 Total Memory: 6.299 GiB
-Name: e9494af01d1a
+Name: 5a5f67806885
 ```
