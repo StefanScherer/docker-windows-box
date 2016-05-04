@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.require_version ">= 1.7.4"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box          = "windows_2016_docker"
+  config.vm.box          = "windows_2016_tp5_docker"
   config.vm.communicator = "winrm"
 
   config.vm.provider "virtualbox" do |v|
@@ -48,6 +48,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "sw-win-01" do |config|
     config.vm.hostname = "sw-win-01"
+    config.vm.provider "virtualbox" do |v|
+      v.customize ["modifyvm", :id, "--memory", 4096]
+    end
     config.vm.network :private_network, ip: "192.168.38.101", gateway: "192.168.38.1"
     config.vm.provision "shell", path: "scripts/add-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.ps1", privileged: false

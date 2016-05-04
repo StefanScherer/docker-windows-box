@@ -26,7 +26,7 @@ A Linux box with Docker and two containers running:
 
 ### sw-win-01 ...
 
-The Windows Server 2016 TP4 machines that spin up a Swarm container to join the Docker Swarm.
+The Windows Server 2016 TP5 machines that spin up a Swarm container to join the Docker Swarm.
 The Docker Engine has connetion to the insecure registry running at `registry:5000`.
 
 ## Create the boxes
