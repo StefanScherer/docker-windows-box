@@ -11,3 +11,11 @@ if (Test-Path C:\vagrant\resources\.gitconfig) {
     copy C:\vagrant\resources\.gitconfig $env:USERPROFILE\.gitconfig
   }
 }
+
+if (Test-Path C:\vagrant\resources\.docker) {
+  if (!(Test-Path "$env:USERPROFILE\.docker")) {
+    Write-Host "Inserting docker config into userprofile"
+    mkdir $env:USERPROFILE\.docker
+    copy C:\vagrant\resources\.docker\* $env:USERPROFILE\.docker
+  }
+}
