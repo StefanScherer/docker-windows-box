@@ -8,7 +8,7 @@ After provisioning the box has the following tools installed:
 
 * Docker TP5 engine and client
 * docker-machine 0.7.0
-* docker-compose 1.7.0
+* docker-compose 1.7.1
 * (Docker Tab completion for PowerShell (posh-docker))
 * Chocolatey
 * Git command line
