@@ -45,7 +45,7 @@ and all the four VM's will be created.
 
 ## Registry storage
 
-The storage of the private Docker Registry will be in the `registry-v2/docker` directory. On each Windows machine the Docker image `stefanscherer/swarm-windows:1.2.0` will be pulled.
+The storage of the private Docker Registry will be in the `registry-v2/docker` directory. On each Windows machine the Docker image `stefanscherer/swarm-windows:1.2.2` will be pulled.
 
 It is save to destroy all the VM's as your Docker images are stored on your host.
 Just recreate the registry and one of the Windows Servers and you can pull your own images again.
@@ -61,7 +61,7 @@ Containers: 3
  Paused: 0
  Stopped: 0
 Images: 9
-Server Version: swarm/1.2.0
+Server Version: swarm/1.2.2
 Role: primary
 Strategy: spread
 Filters: health, port, dependency, affinity, constraint
