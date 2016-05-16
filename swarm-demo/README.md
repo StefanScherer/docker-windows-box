@@ -1,6 +1,6 @@
 # Windows Docker Swarm demo
 
-This is a local setup using Vagrant with VirtualBox to demonstrate a Windows Docker Swarm with a private (insecure) registry. This work was done for the blog post [Run a local Windows Docker Swarm](https://stefanscherer.github.io/build-your-local-windows-docker-swarm/)
+This is a local setup using Vagrant with VirtualBox to demonstrate a Windows Docker Swarm with a private (insecure) registry. This work was done for the blog post [Run a local Windows Docker Swarm](https://stefanscherer.github.io/build-your-local-windows-docker-swarm/). In the meantime the setup is updated to run the registry and swarm master on Windows as well.
 
 ![Windows Docker Swarm demo](images/windows_swarm_demo.png)
 
