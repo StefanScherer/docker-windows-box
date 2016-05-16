@@ -31,26 +31,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "registry" do |config|
-    config.vm.provider "virtualbox" do |v|
-      v.gui = false
-      v.customize ["modifyvm", :id, "--memory", 1024]
-      v.customize ["modifyvm", :id, "--cpus", 1]
-      v.customize ["modifyvm", :id, "--vram", 8]
-    end
-    config.vm.box          = "boxcutter/ubuntu1404"
-    config.vm.communicator = "ssh"
     config.vm.hostname = "registry"
     config.vm.network :private_network, ip: "192.168.38.100", gateway: "192.168.38.1"
-    config.vm.provision "shell", path: "scripts/install-docker.sh"
-    config.vm.provision "shell", path: "scripts/run-registry.sh"
-    config.vm.provision "shell", path: "scripts/run-swarm-master.sh"
+    config.vm.provision "shell", path: "scripts/run-registry.ps1", privileged: false
+    config.vm.provision "shell", path: "scripts/run-swarm-master.ps1", privileged: false
   end
 
   config.vm.define "sw-win-01" do |config|
     config.vm.hostname = "sw-win-01"
-    config.vm.provider "virtualbox" do |v|
-      v.customize ["modifyvm", :id, "--memory", 2048]
-    end
     config.vm.network :private_network, ip: "192.168.38.101", gateway: "192.168.38.1"
     config.vm.provision "shell", path: "scripts/add-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.ps1", privileged: false
