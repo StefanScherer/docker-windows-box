@@ -21,8 +21,8 @@ Depending on your host's memory you can spin up one or more Windows Server VM's.
 
 A Windows Server 2016 TP5 machine with Docker and two containers running:
 
-1. The swarm manager using a token in `config/swarm-token`
-2. A registry using the `registry-v2` folder on your host to store the Docker images
+1. The [swarm](https://github.com/StefanScherer/dockerfiles-windows/tree/master/swarm) manager using a token in `config/swarm-token`
+2. A [registry](https://github.com/StefanScherer/dockerfiles-windows/tree/master/registry) using the `registry-v2` folder on your host (TBD) to store the Docker images
 
 ### sw-win-01 ...
 
