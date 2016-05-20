@@ -1,6 +1,6 @@
 # Windows Docker Swarm demo
 
-This is a local setup using Vagrant with VirtualBox to demonstrate a Windows Docker Swarm with a private (insecure) registry. This work was done for the blog post [Run a local Windows Docker Swarm](https://stefanscherer.github.io/build-your-local-windows-docker-swarm/)
+This is a local setup using Vagrant with VirtualBox to demonstrate a Windows Docker Swarm with a private (insecure) registry. This work was done for the blog post [Run a local Windows Docker Swarm](https://stefanscherer.github.io/build-your-local-windows-docker-swarm/). In the meantime the setup is updated to run the registry and swarm master on Windows as well.
 
 ![Windows Docker Swarm demo](images/windows_swarm_demo.png)
 
@@ -21,8 +21,8 @@ Depending on your host's memory you can spin up one or more Windows Server VM's.
 
 A Windows Server 2016 TP5 machine with Docker and two containers running:
 
-1. The swarm manager using a token in `config/swarm-token`
-2. A registry using the `registry-v2` folder on your host to store the Docker images
+1. The [swarm](https://github.com/StefanScherer/dockerfiles-windows/tree/master/swarm) manager using a token in `config/swarm-token`
+2. A [registry](https://github.com/StefanScherer/dockerfiles-windows/tree/master/registry) using the `registry-v2` folder on your host (TBD) to store the Docker images
 
 ### sw-win-01 ...
 
