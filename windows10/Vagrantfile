@@ -21,6 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "reload"
   config.vm.provision "shell", path: "scripts/install-docker.ps1", privileged: true
   config.vm.provision "shell", path: "scripts/install-base-container-images.ps1", privileged: true, powershell_elevated_interactive: true
+  config.vm.provision "shell", path: "scripts/add-docker-group.ps1", privileged: true
+  config.vm.provision "reload"
 
   ["vmware_fusion", "vmware_workstation"].each do |provider|
     config.vm.provider provider do |v, override|
