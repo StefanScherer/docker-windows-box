@@ -41,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.vmx["sound.present"] = "TRUE"
     v.vmx["sound.autodetect"] = "TRUE"
     v.enable_vmrun_ip_lookup = false
-    v.vmx["memsize"] = "6096"
+    v.vmx["memsize"] = "2048"
     v.vmx["numvcpus"] = "2"
     v.vmx["vhv.enable"] = "TRUE"
   end
