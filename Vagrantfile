@@ -42,6 +42,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.linked_clone = true if Vagrant::VERSION =~ /^1.8/
   end
 
+  config.vm.provider "hyperv" do |v|
+    v.cpus = 2
+    v.maxmemory = 2048
+    v.differencing_disk = true
+  end
+
   config.vm.provision "shell", path: "scripts/install-chocolatey.ps1", privileged: false
   config.vm.provision "shell", path: "scripts/install-git.ps1", privileged: false
   config.vm.provision "shell", path: "scripts/install-dockertools.ps1", privileged: false
