@@ -17,7 +17,7 @@ After provisioning the box has the following tools installed:
 
 Optionally you can create a Hyper-V Docker Linux machine and have a multi architecture experience in one VM.
 
-Tested with VMware Fusion Pro 8.1.1 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
+Tested with Vagrant 1.8.1 (not 1.8.4), VMware Fusion Pro 8.1.1 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
 
 You can learn and play a lot of scenarios with it:
 
