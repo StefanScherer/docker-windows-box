@@ -4,7 +4,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "windows_10_insider_14352"
+  config.vm.box = "windows_10"
   config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
 
   config.vm.communicator = "winrm"
@@ -21,9 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", path: "scripts/install-container-feature.ps1", privileged: true
   config.vm.provision "shell", path: "scripts/enable-autologon.ps1", privileged: true
   config.vm.provision "reload"
-  config.vm.provision "shell", path: "scripts/install-docker.ps1", privileged: true
-  config.vm.provision "shell", path: "scripts/install-base-container-images.ps1", privileged: true, powershell_elevated_interactive: true
   config.vm.provision "shell", path: "scripts/add-docker-group.ps1", privileged: true
+  config.vm.provision "shell", path: "scripts/install-docker.ps1", privileged: true
   config.vm.provision "reload"
   config.vm.provision "shell", path: "../scripts/install-chocolatey.ps1", privileged: false
   config.vm.provision "shell", path: "../scripts/install-git.ps1", privileged: false
