@@ -1,14 +1,14 @@
 # docker-windows-box
 
-This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016 TP5.
+This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016 TP5. Have a look at my blog posts how to [Setup a local Windows 2016 TP5 Docker VM](https://stefanscherer.github.io/setup-local-windows-2016-tp5-docker-vm/) and [Adding Hyper-V support to 2016 TP5 Docker VM](https://stefanscherer.github.io/adding-hyper-v-support-to-2016-tp5-docker-vm/) for more details.
 
 ![](images/tp5.png)
 
 After provisioning the box has the following tools installed:
 
-* Docker TP5 engine and client
-* docker-machine 0.7.0
-* docker-compose 1.7.1
+* Windows Server 2016 TP5 with Docker Engine 1.12 and client
+* docker-machine 0.8.0
+* docker-compose 1.8.0
 * (Docker Tab completion for PowerShell (posh-docker))
 * Chocolatey
 * Git command line
