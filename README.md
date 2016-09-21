@@ -27,7 +27,7 @@ Future work will be a Docker Swarm with both Linux and Windows Docker Engines...
 
 ## Get the base box
 
-First register to [evaluate Windows 2016 TP5](https://technet.microsoft.com/de-de/evalcenter/dn781243.aspx), but you don't need to download the ISO manually.
+First register to [evaluate Windows 2016 TP5](https://technet.microsoft.com/evalcenter/dn781243.aspx), but you don't need to download the ISO manually.
 
 If you don't have the Vagrant `windows_2016_tp5_docker` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
 
