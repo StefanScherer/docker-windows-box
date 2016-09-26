@@ -1,8 +1,6 @@
 # https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start_windows_10
 Set-ExecutionPolicy Bypass -scope Process
 
-Set-ItemProperty -Path 'HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization\Containers' -Name VSmbDisableOplocks -Type DWord -Value 1 -Force
-
 New-Item -Type Directory -Path "$($env:ProgramFiles)\docker"
 Invoke-WebRequest "https://master.dockerproject.com/windows/amd64/docker-1.13.0-dev.zip" -OutFile "$env:TEMP\docker-1.13.0-dev.zip" -UseBasicParsing
 Expand-Archive -Path $env:TEMP\docker-1.13.0-dev.zip -DestinationPath $env:ProgramFiles -Force
