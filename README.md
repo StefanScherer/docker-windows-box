@@ -1,14 +1,14 @@
 # docker-windows-box
 
-This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016 TP5. Have a look at my blog posts how to [Setup a local Windows 2016 TP5 Docker VM](https://stefanscherer.github.io/setup-local-windows-2016-tp5-docker-vm/) and [Adding Hyper-V support to 2016 TP5 Docker VM](https://stefanscherer.github.io/adding-hyper-v-support-to-2016-tp5-docker-vm/) for more details.
+This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016. Have a look at my blog posts how to [Setup a local Windows 2016 TP5 Docker VM](https://stefanscherer.github.io/setup-local-windows-2016-tp5-docker-vm/) and [Adding Hyper-V support to 2016 TP5 Docker VM](https://stefanscherer.github.io/adding-hyper-v-support-to-2016-tp5-docker-vm/) for more details.
 
 ![](images/tp5.png)
 
 After provisioning the box has the following tools installed:
 
-* Windows Server 2016 TP5 with Docker Engine 1.12 and client
-* docker-machine 0.8.0
-* docker-compose 1.8.0
+* Windows Server 2016 with Docker Engine CS 1.12 and client
+* docker-machine 0.8.1
+* docker-compose 1.8.1
 * (Docker Tab completion for PowerShell (posh-docker))
 * Chocolatey
 * Git command line
@@ -17,7 +17,7 @@ After provisioning the box has the following tools installed:
 
 Optionally you can create a Hyper-V Docker Linux machine and have a multi architecture experience in one VM.
 
-Tested with Vagrant 1.8.1 (not 1.8.4), VMware Fusion Pro 8.1.1 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
+Tested with Vagrant 1.8.1 (not 1.8.4), VMware Fusion Pro 8.5.0 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
 
 You can learn and play a lot of scenarios with it:
 
@@ -27,9 +27,9 @@ Future work will be a Docker Swarm with both Linux and Windows Docker Engines...
 
 ## Get the base box
 
-First register to [evaluate Windows 2016 TP5](https://technet.microsoft.com/evalcenter/dn781243.aspx), but you don't need to download the ISO manually.
+First register to [evaluate Windows 2016](https://www.microsoft.com/evalcenter/evaluate-windows-server-2016), but you don't need to download the ISO manually.
 
-If you don't have the Vagrant `windows_2016_tp5_docker` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
+If you don't have the Vagrant `windows_2016_docker` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
 
 To build the base box you have to run these commands on your host machine:
 
@@ -37,7 +37,7 @@ To build the base box you have to run these commands on your host machine:
 git clone https://github.com/StefanScherer/packer-windows
 cd packer-windows
 packer build --only=vmware-iso windows_2016_docker.json
-vagrant box add windows_2016_tp5_docker windows_2016_docker_vmware.box
+vagrant box add windows_2016_docker windows_2016_docker_vmware.box
 ```
 
 ## Spin up the box

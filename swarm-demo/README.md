@@ -20,14 +20,14 @@ Depending on your host's memory you can spin up one or more Windows Server VM's.
 
 ### registry
 
-A Windows Server 2016 TP5 machine with Docker and two containers running:
+A Windows Server 2016 machine with Docker and two containers running:
 
 1. The [swarm](https://github.com/StefanScherer/dockerfiles-windows/tree/master/swarm) manager using a token in `config/swarm-token`
 2. A [registry](https://github.com/StefanScherer/dockerfiles-windows/tree/master/registry) using the `registry-v2` folder on your host (TBD) to store the Docker images
 
 ### sw-win-01 ...
 
-The Windows Server 2016 TP5 machines that spin up a Swarm container to join the Docker Swarm.
+The Windows Server 2016 machines that spin up a Swarm container to join the Docker Swarm.
 The Docker Engine has connection to the insecure registry running at `registry:5000`.
 
 ## Create the boxes
