@@ -25,6 +25,8 @@ A Windows Server 2016 machine with Docker and two containers running:
 1. The [swarm](https://github.com/StefanScherer/dockerfiles-windows/tree/master/swarm) manager using a token in `config/swarm-token`
 2. A [registry](https://github.com/StefanScherer/dockerfiles-windows/tree/master/registry) using the `registry-v2` folder on your host (TBD) to store the Docker images
 
+Notice: The registry inside a Windows Container does not work at the moment.
+
 ### sw-win-01 ...
 
 The Windows Server 2016 machines that spin up a Swarm container to join the Docker Swarm.
@@ -46,7 +48,7 @@ and all the four VM's will be created.
 
 ## Registry storage
 
-The storage of the private Docker Registry will be in the `registry-v2/docker` directory. On each Windows machine the Docker image `stefanscherer/swarm-windows:1.2.2` will be pulled.
+The storage of the private Docker Registry will be in the `registry-v2/docker` directory. On each Windows machine the Docker image `stefanscherer/swarm-windows:1.2.5` will be pulled.
 
 It is save to destroy all the VM's as your Docker images are stored on your host.
 Just recreate the registry and one of the Windows Servers and you can pull your own images again.
