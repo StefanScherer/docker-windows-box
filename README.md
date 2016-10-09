@@ -29,6 +29,10 @@ Future work will be a Docker Swarm with both Linux and Windows Docker Engines...
 
 First register to [evaluate Windows 2016](https://www.microsoft.com/evalcenter/evaluate-windows-server-2016), but you don't need to download the ISO manually.
 
+For the next step you need [Packer](https://packer.io). You have several ways how to install it. The easiest way is to install it via [Homebrew](http://brew.sh/). After you have installed Homebrew. Run the following command when you installed Homebrew:
+```bash
+brew install packer
+```
 If you don't have the Vagrant `windows_2016_docker` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
 
 To build the base box you have to run these commands on your host machine:
