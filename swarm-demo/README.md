@@ -124,3 +124,52 @@ Debug Mode (server): false
 WARNING: No kernel memory limit support
 Live Restore Enabled: false
 ```
+
+Now we take a look at the images we have. Both a Windows swarm and Linux swarm image is there.
+
+```
+PS C:\> $env:DOCKER_HOST="tcp://registry:3375"
+PS C:\> docker images
+REPOSITORY                    TAG                 IMAGE ID            CREATED             SIZE
+stefanscherer/swarm-windows   1.2.5               857fd9043059        12 days ago         7.36 GB
+microsoft/windowsservercore   10.0.14393.206      f20579da8e4e        2 weeks ago         7.33 GB
+microsoft/windowsservercore   latest              f20579da8e4e        2 weeks ago         7.33 GB
+swarm                         1.2.5               942fd5fd357e        7 weeks ago         19.5 MB
+```
+
+## Run a Linux container
+
+To run a Linux container in our multi OS swarm we have to use [constraints](https://docs.docker.com/swarm/scheduler/filter/).
+
+The easiest label is the `storagedriver` as Windows only has `windowsfilter` as possible value.
+
+So to spin up a Linux container avoiding all Windows swarm nodes we use the constraint `storagedriver!=windowsfilter`.
+
+```
+PS C:\> docker -H registry:3375 run -e constraint:storagedriver!=windowsfilter -d nginx
+a7ba5d1386387c2b1be94a936016850171be13dcf92db759695c1b0e4f51cb61
+PS C:\> docker ps
+CONTAINER ID        IMAGE                               COMMAND                   CREATED             STATUS              PORTS               NAMES
+a7ba5d138638        nginx                               "nginx -g 'daemon ..."    4 seconds ago       Up 3 seconds        80/tcp, 443/tcp     sw-lin-01/happy_hypatia
+757d92b05f51        stefanscherer/swarm-windows:1.2.5   "\\swarm.exe join -..."   18 minutes ago      Up 18 minutes                           sw-win-03/evil_khorana
+c64e46706988        stefanscherer/swarm-windows:1.2.5   "\\swarm.exe join -..."   45 minutes ago      Up 45 minutes                           sw-win-02/romantic_yalow
+a432ef9c9465        stefanscherer/swarm-windows:1.2.5   "\\swarm.exe join -..."   About an hour ago   Up About an hour                        sw-win-01/nostalgic_newton
+```
+
+And as you can see the `nginx` container is runnin in the  `sw-lin-01` node.
+
+## Run a Windows container
+
+A similar constraint can be used to run Windows containers only on Windows nodes.
+
+```
+PS C:\> docker -H registry:3375 run -e constraint:storagedriver==windowsfilter -d microsoft/iis
+8a177ff5c2615524c75030369e394d64ea7d00f3c8ab3214bd00805ec0cd224f
+PS C:\> docker ps
+CONTAINER ID        IMAGE                               COMMAND                   CREATED             STATUS              PORTS               NAMES
+8a177ff5c261        microsoft/iis                       "C:\\ServiceMonitor..."   2 minutes ago       Up 2 minutes                            sw-win-01/elastic_allen
+a7ba5d138638        nginx                               "nginx -g 'daemon ..."    4 minutes ago       Up 4 minutes        80/tcp, 443/tcp     sw-lin-01/happy_hypatia
+757d92b05f51        stefanscherer/swarm-windows:1.2.5   "\\swarm.exe join -..."   23 minutes ago      Up 23 minutes                           sw-win-03/evil_khorana
+c64e46706988        stefanscherer/swarm-windows:1.2.5   "\\swarm.exe join -..."   49 minutes ago      Up 49 minutes                           sw-win-02/romantic_yalow
+a432ef9c9465        stefanscherer/swarm-windows:1.2.5   "\\swarm.exe join -..."   About an hour ago   Up About an hour                        sw-win-01/nostalgic_newton
+```
