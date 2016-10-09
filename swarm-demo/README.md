@@ -10,11 +10,11 @@ There are four VM's with the following internal network and IP addresses:
 
 | VM        | IP address     | Memory |
 |-----------|----------------|--------|
-| registry  | 192.168.38.100 | 2GB    |
-| sw-win-01 | 192.168.38.101 | 2GB    |
-| sw-win-02 | 192.168.38.102 | 2GB    |
-| sw-win-03 | 192.168.38.103 | 2GB    |
-| sw-lin-01 | 192.168.38.201 | 2GB    |
+| registry  | 192.168.36.100 | 2GB    |
+| sw-win-01 | 192.168.36.101 | 2GB    |
+| sw-win-02 | 192.168.36.102 | 2GB    |
+| sw-win-03 | 192.168.36.103 | 2GB    |
+| sw-lin-01 | 192.168.36.201 | 2GB    |
 
 Depending on your host's memory you can spin up one or more Windows Server VM's.
 
@@ -55,11 +55,11 @@ Just recreate the registry and one of the Windows Servers and you can pull your 
 
 ## Use the Windows Docker swarm
 
-Connect from your host to the Swarm manager which runs in the `registry` VM with the IP address `192.168.38.100`.
+Connect from your host to the Swarm manager which runs in the `registry` VM with the IP address `192.168.36.100`.
 
 ```
 $ unset DOCKER_TLS_VERIFY DOCKER_CERT_PATH
-$ docker -H tcp://192.168.38.100:3375 info
+$ docker -H tcp://192.168.36.100:3375 info
 Containers: 3
  Running: 3
  Paused: 0
@@ -70,7 +70,7 @@ Role: primary
 Strategy: spread
 Filters: health, port, containerslots, dependency, affinity, constraint
 Nodes: 3
- sw-win-01: 192.168.38.101:2375
+ sw-win-01: 192.168.36.101:2375
   └ ID: 7GSP:7HJ7:XT6L:SCLE:657O:SUZ4:JOES:AIJN:FNRY:WF6A:54U7:RRSN
   └ Status: Healthy
   └ Containers: 1
@@ -80,7 +80,7 @@ Nodes: 3
   └ Error: (none)
   └ UpdatedAt: 2016-05-16T11:47:46Z
   └ ServerVersion: 1.12.0-dev
- sw-win-02: 192.168.38.102:2375
+ sw-win-02: 192.168.36.102:2375
   └ ID: ZKUV:D7MI:E2NR:UREE:NWEY:6GAV:MUMP:5AMZ:3Z35:ZVDP:USK2:M5CL
   └ Status: Healthy
   └ Containers: 1
@@ -90,7 +90,7 @@ Nodes: 3
   └ Error: (none)
   └ UpdatedAt: 2016-05-16T11:47:41Z
   └ ServerVersion: 1.12.0-dev
- sw-win-03: 192.168.38.103:2375
+ sw-win-03: 192.168.36.103:2375
   └ ID: U4KK:MKSD:66RL:JXKC:URPS:T2L2:ER4Q:GGHG:NIV4:6MBA:B3E5:TMSX
   └ Status: Healthy
   └ Containers: 1
