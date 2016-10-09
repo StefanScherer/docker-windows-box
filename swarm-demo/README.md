@@ -35,7 +35,7 @@ The Docker Engine has connection to the insecure registry running at `registry:5
 ## Create the boxes
 
 You need Vagrant, VirtualBox and the [windows_2016_docker](https://github.com/StefanScherer/packer-windows) Vagrant box on your host.
-This demo is tested on OSX with VirtualBox 5.0.20.
+This demo is tested on OSX with VirtualBox 5.0.26.
 
 First create a new swarm token and overwrite the file `config/swarm-token`.
 Then just run
@@ -58,59 +58,69 @@ Just recreate the registry and one of the Windows Servers and you can pull your 
 Connect from your host to the Swarm manager which runs in the `registry` VM with the IP address `192.168.36.100`.
 
 ```
-$ unset DOCKER_TLS_VERIFY DOCKER_CERT_PATH
-$ docker -H tcp://192.168.36.100:3375 info
-Containers: 3
- Running: 3
+PS C:\> docker -H registry:3375 info
+Containers: 4
+ Running: 4
  Paused: 0
  Stopped: 0
-Images: 9
-Server Version: swarm/1.2.2
+Images: 7
+Server Version: swarm/1.2.5
 Role: primary
 Strategy: spread
 Filters: health, port, containerslots, dependency, affinity, constraint
-Nodes: 3
+Nodes: 4
+ sw-lin-01: 192.168.36.201:2375
+  └ ID: QJRM:DNTF:T5Z6:EVFX:XTRE:OFTL:3JYJ:Y4NH:HNQR:UJYG:L4KL:WPBJ
+  └ Status: Healthy
+  └ Containers: 1 (1 Running, 0 Paused, 0 Stopped)
+  └ Reserved CPUs: 0 / 2
+  └ Reserved Memory: 0 B / 2.051 GiB
+  └ Labels: kernelversion=4.4.0-38-generic, operatingsystem=Ubuntu 16.04.1 LTS, storagedriver=aufs
+  └ UpdatedAt: 2016-10-09T13:49:34Z
+  └ ServerVersion: 1.12.1
  sw-win-01: 192.168.36.101:2375
-  └ ID: 7GSP:7HJ7:XT6L:SCLE:657O:SUZ4:JOES:AIJN:FNRY:WF6A:54U7:RRSN
+  └ ID: LYQ3:6MSS:HULY:6BR3:YH3J:UZFG:QLDL:7PL5:BKFD:YZPI:IGT3:WKXL
   └ Status: Healthy
-  └ Containers: 1
+  └ Containers: 1 (1 Running, 0 Paused, 0 Stopped)
   └ Reserved CPUs: 0 / 2
   └ Reserved Memory: 0 B / 2.1 GiB
-  └ Labels: executiondriver=, kernelversion=10.0 14300 (14300.1016.amd64fre.rs1_release_svc.160428-1819), operatingsystem=Windows Server 2016 Datacenter Technical Preview 5, storagedriver=windowsfilter
-  └ Error: (none)
-  └ UpdatedAt: 2016-05-16T11:47:46Z
-  └ ServerVersion: 1.12.0-dev
+  └ Labels: kernelversion=10.0 14393 (14393.206.amd64fre.rs1_release.160915-0644), operatingsystem=Windows Server 2016 Standard Evaluation, storagedriver=windowsfilter
+  └ UpdatedAt: 2016-10-09T13:49:27Z
+  └ ServerVersion: 1.12.2-cs2-ws-beta-rc1
  sw-win-02: 192.168.36.102:2375
-  └ ID: ZKUV:D7MI:E2NR:UREE:NWEY:6GAV:MUMP:5AMZ:3Z35:ZVDP:USK2:M5CL
+  └ ID: ZOLM:NV32:ITYU:B7EU:ER2U:BMSO:IMDG:RHDW:NACR:OOFH:7JQ5:TLC2
   └ Status: Healthy
-  └ Containers: 1
+  └ Containers: 1 (1 Running, 0 Paused, 0 Stopped)
   └ Reserved CPUs: 0 / 2
   └ Reserved Memory: 0 B / 2.1 GiB
-  └ Labels: executiondriver=, kernelversion=10.0 14300 (14300.1016.amd64fre.rs1_release_svc.160428-1819), operatingsystem=Windows Server 2016 Datacenter Technical Preview 5, storagedriver=windowsfilter
-  └ Error: (none)
-  └ UpdatedAt: 2016-05-16T11:47:41Z
-  └ ServerVersion: 1.12.0-dev
+  └ Labels: kernelversion=10.0 14393 (14393.206.amd64fre.rs1_release.160915-0644), operatingsystem=Windows Server 2016 Standard Evaluation, storagedriver=windowsfilter
+  └ UpdatedAt: 2016-10-09T13:48:56Z
+  └ ServerVersion: 1.12.2-cs2-ws-beta-rc1
  sw-win-03: 192.168.36.103:2375
-  └ ID: U4KK:MKSD:66RL:JXKC:URPS:T2L2:ER4Q:GGHG:NIV4:6MBA:B3E5:TMSX
+  └ ID: LCIU:CBB6:EQEW:AD25:CVBR:Z7GE:ODON:6DFZ:DSTR:GAKE:5DRE:IJ73
   └ Status: Healthy
-  └ Containers: 1
+  └ Containers: 1 (1 Running, 0 Paused, 0 Stopped)
   └ Reserved CPUs: 0 / 2
   └ Reserved Memory: 0 B / 2.1 GiB
-  └ Labels: executiondriver=, kernelversion=10.0 14300 (14300.1016.amd64fre.rs1_release_svc.160428-1819), operatingsystem=Windows Server 2016 Datacenter Technical Preview 5, storagedriver=windowsfilter
-  └ Error: (none)
-  └ UpdatedAt: 2016-05-16T11:48:14Z
-  └ ServerVersion: 1.12.0-dev
+  └ Labels: kernelversion=10.0 14393 (14393.206.amd64fre.rs1_release.160915-0644), operatingsystem=Windows Server 2016 Standard Evaluation, storagedriver=windowsfilter
+  └ UpdatedAt: 2016-10-09T13:49:22Z
+  └ ServerVersion: 1.12.2-cs2-ws-beta-rc1
 Plugins:
  Volume:
  Network:
-Kernel Version: 6.2 9200 (14300.1000.amd64fre.rs1_release_svc.160324-1723)
+Swarm:
+ NodeID:
+ Is Manager: false
+ Node Address:
+Kernel Version: 6.2 9200 (14393.206.amd64fre.rs1_release.160915-0644)
 Operating System: windows
 Architecture: amd64
-CPUs: 6
-Total Memory: 6.299 GiB
-Name: WIN-DE6U4068NAF
+CPUs: 8
+Total Memory: 8.35 GiB
+Name: 01d0ea601a29
 Docker Root Dir:
-Debug mode (client): false
-Debug mode (server): false
+Debug Mode (client): false
+Debug Mode (server): false
 WARNING: No kernel memory limit support
+Live Restore Enabled: false
 ```
