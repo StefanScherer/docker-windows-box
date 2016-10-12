@@ -13,5 +13,5 @@ $env:Path = $env:Path + ";$($env:ProgramFiles)\docker"
 Start-Service Docker
 
 Write-Host "Installing NanoServer docker image..."
-docker pull microsoft/nanoserver:10.0.14393.206
+docker pull microsoft/nanoserver:10.0.14393.321
 docker pull microsoft/nanoserver
