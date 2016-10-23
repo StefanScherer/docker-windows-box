@@ -7,8 +7,8 @@ This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016
 After provisioning the box has the following tools installed:
 
 * Windows Server 2016 with Docker Engine CS 1.12 and client
-* docker-machine 0.8.1
-* docker-compose 1.8.1
+* docker-machine 0.8.2
+* docker-compose 1.9.0-rc1
 * (Docker Tab completion for PowerShell (posh-docker))
 * Chocolatey
 * Git command line
