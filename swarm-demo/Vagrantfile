@@ -30,6 +30,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.provider :vcloud do |vcloud, override|
+    vcloud.vapp_prefix = "windows-docker-swarm"
+    vcloud.ip_subnet = "192.168.36.1/255.255.255.0" # our test subnet with fixed IP adresses for everyone
+    override.vm.usable_port_range = 2200..2999
+    vcloud.memory = 2048
+    vcloud.cpus = 2
+  end
+
   config.vm.define "registry" do |config|
     config.vm.hostname = "registry"
     config.vm.network :private_network, ip: "192.168.36.100", gateway: "192.168.36.1"
