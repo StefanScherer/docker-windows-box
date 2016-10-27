@@ -176,6 +176,6 @@ a432ef9c9465        stefanscherer/swarm-windows:1.2.5   "\\swarm.exe join -..." 
 
 ## Manage Swarm with Portainer UI
 
-I've added another running [portainer](https://portainer.io) in a Windows container on the registry machine. The `portainer` container talks to the `swarm-manager` container and offers its UI on port 9000 on the host of the registry machine.
+I've added another running [portainer](http://portainer.io) in a Windows container on the registry machine. The `portainer` container talks to the `swarm-manager` container and offers its UI on port 9000 on the host of the registry machine.
 
 ![portainer](images/portainer.png)
