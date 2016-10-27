@@ -40,28 +40,31 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "registry" do |config|
     config.vm.hostname = "registry"
-    config.vm.network :private_network, ip: "192.168.36.100", gateway: "192.168.36.1"
+    config.vm.network :private_network, ip: "192.168.36.2", gateway: "192.168.36.1"
     config.vm.provision "shell", path: "scripts/run-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-master.ps1", privileged: false
+    config.vm.provision "shell", path: "scripts/run-portainer.ps1", privileged: false
+    config.vm.network :forwarded_port, guest: 3375, host: 3375, id: "swarm", auto_correct: true
+    config.vm.network :forwarded_port, guest: 9000, host: 9000, id: "portainer", auto_correct: true
   end
 
   config.vm.define "sw-win-01" do |config|
     config.vm.hostname = "sw-win-01"
-    config.vm.network :private_network, ip: "192.168.36.101", gateway: "192.168.36.1"
+    config.vm.network :private_network, ip: "192.168.36.3", gateway: "192.168.36.1"
     config.vm.provision "shell", path: "scripts/add-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.ps1", privileged: false
   end
 
   config.vm.define "sw-win-02" do |config|
     config.vm.hostname = "sw-win-02"
-    config.vm.network :private_network, ip: "192.168.36.102", gateway: "192.168.36.1"
+    config.vm.network :private_network, ip: "192.168.36.4", gateway: "192.168.36.1"
     config.vm.provision "shell", path: "scripts/add-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.ps1", privileged: false
   end
 
   config.vm.define "sw-win-03" do |config|
     config.vm.hostname = "sw-win-03"
-    config.vm.network :private_network, ip: "192.168.36.103", gateway: "192.168.36.1"
+    config.vm.network :private_network, ip: "192.168.36.5", gateway: "192.168.36.1"
     config.vm.provision "shell", path: "scripts/add-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.ps1", privileged: false
   end
@@ -70,7 +73,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.hostname     = "sw-lin-01"
     config.vm.box          = "ubuntu/xenial64"
     config.vm.communicator = "ssh"
-    config.vm.network :private_network, ip: "192.168.36.201", gateway: "192.168.36.1"
+    config.vm.network :private_network, ip: "192.168.36.6", gateway: "192.168.36.1"
     config.vm.provision "shell", path: "scripts/install-docker.sh", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.sh", privileged: false
   end

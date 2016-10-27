@@ -8,13 +8,13 @@ This is a local setup using Vagrant with VirtualBox to demonstrate a Windows Doc
 
 There are four VM's with the following internal network and IP addresses:
 
-| VM        | IP address     | Memory |
-|-----------|----------------|--------|
-| registry  | 192.168.36.100 | 2GB    |
-| sw-win-01 | 192.168.36.101 | 2GB    |
-| sw-win-02 | 192.168.36.102 | 2GB    |
-| sw-win-03 | 192.168.36.103 | 2GB    |
-| sw-lin-01 | 192.168.36.201 | 2GB    |
+| VM        | IP address   | Memory |
+|-----------|--------------|--------|
+| registry  | 192.168.36.2 | 2GB    |
+| sw-win-01 | 192.168.36.3 | 2GB    |
+| sw-win-02 | 192.168.36.4 | 2GB    |
+| sw-win-03 | 192.168.36.5 | 2GB    |
+| sw-lin-01 | 192.168.36.6 | 2GB    |
 
 Depending on your host's memory you can spin up one or more Windows Server VM's.
 
@@ -173,3 +173,9 @@ a7ba5d138638        nginx                               "nginx -g 'daemon ..."  
 c64e46706988        stefanscherer/swarm-windows:1.2.5   "\\swarm.exe join -..."   49 minutes ago      Up 49 minutes                           sw-win-02/romantic_yalow
 a432ef9c9465        stefanscherer/swarm-windows:1.2.5   "\\swarm.exe join -..."   About an hour ago   Up About an hour                        sw-win-01/nostalgic_newton
 ```
+
+## Manage Swarm with Portainer UI
+
+I've added another running [portainer](https://portainer.io) in a Windows container on the registry machine. The `portainer` container talks to the `swarm-manager` container and offers its UI on port 9000 on the host of the registry machine.
+
+![portainer](images/portainer.png)
