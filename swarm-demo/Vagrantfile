@@ -34,13 +34,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vcloud.vapp_prefix = "windows-docker-swarm"
     vcloud.ip_subnet = "192.168.36.1/255.255.255.0" # our test subnet with fixed IP adresses for everyone
     override.vm.usable_port_range = 2200..2999
-    vcloud.memory = 2048
-    vcloud.cpus = 2
+    vcloud.memory = 8192
+    vcloud.cpus = 4
   end
 
   config.vm.define "registry" do |config|
     config.vm.hostname = "registry"
     config.vm.network :private_network, ip: "192.168.36.2", gateway: "192.168.36.1"
+    config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "192.168.36.2"
     config.vm.provision "shell", path: "scripts/run-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-master.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-portainer.ps1", privileged: false
@@ -51,6 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "sw-win-01" do |config|
     config.vm.hostname = "sw-win-01"
     config.vm.network :private_network, ip: "192.168.36.3", gateway: "192.168.36.1"
+    config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "192.168.36.3"
     config.vm.provision "shell", path: "scripts/add-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.ps1", privileged: false
   end
@@ -58,6 +60,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "sw-win-02" do |config|
     config.vm.hostname = "sw-win-02"
     config.vm.network :private_network, ip: "192.168.36.4", gateway: "192.168.36.1"
+    config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "192.168.36.4"
     config.vm.provision "shell", path: "scripts/add-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.ps1", privileged: false
   end
@@ -65,6 +68,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "sw-win-03" do |config|
     config.vm.hostname = "sw-win-03"
     config.vm.network :private_network, ip: "192.168.36.5", gateway: "192.168.36.1"
+    config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "192.168.36.5"
     config.vm.provision "shell", path: "scripts/add-registry.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/run-swarm-agent.ps1", privileged: false
   end
