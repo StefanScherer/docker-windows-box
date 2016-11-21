@@ -36,7 +36,7 @@ The Docker Engine has connection to the insecure registry running at `registry:5
 ## Create the boxes
 
 You need Vagrant, VirtualBox and the [windows_2016_docker](https://github.com/StefanScherer/packer-windows) Vagrant box on your host.
-This demo is tested on OSX with VirtualBox 5.0.26.
+This demo is tested on OSX with VirtualBox 5.1.8 and VMware Fusion Pro 8.5.2.
 
 First create a new swarm token and overwrite the file `config/swarm-token`.
 Then just run
