@@ -23,9 +23,10 @@ Depending on your host's memory you can spin up one or more Windows Server VM's.
 A Windows Server 2016 machine with Docker and two containers running:
 
 1. The [swarm](https://github.com/StefanScherer/dockerfiles-windows/tree/master/swarm) manager using a token in `config/swarm-token`
-2. A [registry](https://github.com/StefanScherer/dockerfiles-windows/tree/master/registry) using the `registry-v2` folder on your host (TBD) to store the Docker images
+2. A [registry](https://hub.docker.com/r/sixeyed/registry/) using the `registry-v2` folder on your host to store the Docker images
 
-Notice: The registry inside a Windows Container does not work at the moment.
+Notice: The registry inside a Windows Container does only work with a custom
+version of Go.
 
 ### sw-win-01 ...
 
