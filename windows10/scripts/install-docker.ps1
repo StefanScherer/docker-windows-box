@@ -3,9 +3,9 @@ Set-ExecutionPolicy Bypass -scope Process
 
 New-Item -Type Directory -Path "$($env:ProgramFiles)\docker"
 $wc = New-Object net.webclient
-$wc.Downloadfile("https://master.dockerproject.com/windows/amd64/docker-1.13.0-dev.zip", "$env:TEMP\docker-1.13.0-dev.zip")
-Expand-Archive -Path $env:TEMP\docker-1.13.0-dev.zip -DestinationPath $env:ProgramFiles -Force
-Remove-Item $env:TEMP\docker-1.13.0-dev.zip
+$wc.Downloadfile("https://test.docker.com/builds/Windows/x86_64/docker-1.13.0-rc2.zip", "$env:TEMP\docker-1.13.0-rc2.zip")
+Expand-Archive -Path $env:TEMP\docker-1.13.0-rc2.zip -DestinationPath $env:ProgramFiles -Force
+Remove-Item $env:TEMP\docker-1.13.0-rc2.zip
 [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$($env:ProgramFiles)\docker", [EnvironmentVariableTarget]::Machine)
 $env:Path = $env:Path + ";$($env:ProgramFiles)\docker"
 . dockerd --register-service -H npipe:// -H 0.0.0.0:2375 -G docker
@@ -13,5 +13,4 @@ $env:Path = $env:Path + ";$($env:ProgramFiles)\docker"
 Start-Service Docker
 
 Write-Host "Installing NanoServer docker image..."
-docker pull microsoft/nanoserver:10.0.14393.321
 docker pull microsoft/nanoserver
