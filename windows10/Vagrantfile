@@ -7,6 +7,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "windows_10"
   config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
 
+  config.vm.hostname = "win10"
   config.vm.communicator = "winrm"
 
   config.winrm.username = "vagrant"
@@ -23,18 +24,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "reload"
   config.vm.provision "shell", path: "scripts/add-docker-group.ps1", privileged: true
   config.vm.provision "shell", path: "scripts/install-docker.ps1", privileged: true
-  config.vm.provision "reload"
   config.vm.provision "shell", path: "../scripts/install-chocolatey.ps1", privileged: false
-  config.vm.provision "shell", path: "../scripts/install-git.ps1", privileged: false
   config.vm.provision "shell", path: "../scripts/install-dockertools.ps1", privileged: false
-  config.vm.provision "shell", path: "../scripts/install-atom.ps1", privileged: false
-  config.vm.provision "shell", path: "../scripts/insert-ssh-key.ps1", privileged: false
-  config.vm.provision "shell", path: "../scripts/notify-environment-changes.ps1", privileged: false
-  config.vm.provision "shell", path: "../scripts/install-posh-git.ps1", privileged: false
+  config.vm.provision "reload"
 
   ["vmware_fusion", "vmware_workstation"].each do |provider|
     config.vm.provider provider do |v, override|
       v.gui = true
+      v.memory = 4096
+      v.cpus = 2
     end
   end
 
@@ -49,8 +47,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.vmx["sound.present"] = "TRUE"
     v.vmx["sound.autodetect"] = "TRUE"
     v.enable_vmrun_ip_lookup = false
-    v.vmx["memsize"] = "2048"
-    v.vmx["numvcpus"] = "2"
     v.vmx["vhv.enable"] = "TRUE"
   end
 end

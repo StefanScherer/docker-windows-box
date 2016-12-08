@@ -8,9 +8,6 @@ Expand-Archive -Path $env:TEMP\docker-1.13.0-rc3.zip -DestinationPath $env:Progr
 Remove-Item $env:TEMP\docker-1.13.0-rc3.zip
 [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$($env:ProgramFiles)\docker", [EnvironmentVariableTarget]::Machine)
 $env:Path = $env:Path + ";$($env:ProgramFiles)\docker"
-. dockerd --register-service -H npipe:// -H 0.0.0.0:2375 -G docker
+. dockerd --register-service -H npipe:// -H 0.0.0.0:2375 -G docker --label windows
 
 Start-Service Docker
-
-Write-Host "Installing NanoServer docker image..."
-docker pull microsoft/nanoserver
