@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ["vmware_fusion", "vmware_workstation"].each do |provider|
     config.vm.provider provider do |v, override|
       v.gui = true
-      v.memory = 4096
+      v.memory = 5096
       v.cpus = 2
     end
   end
