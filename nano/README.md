@@ -3,15 +3,19 @@
 This is a work in progress using Matt Wrock's NanoServer Vagrant box from Atlas
 and some half manual provisioning.
 
+## Build the Vagrant box
+
+```
+cd build
+./build.sh
+vagrant box add nanoserver_docker nanoserver_docker_virtualbox.box
+cd ..
+```
+
+## Run the Nano Server Docker VM
+
 ```
 vagrant up --provider virtualbox
+export DOCKER_HOST=tcp://127.0.0.1:2375
+docker version
 ```
-
-Then use the `winrm` Go binary to connect to the VM
-
-```
-winrm -port 55958 cmd
-powershell
-```
-
-Then copy the commands of the `provision.ps1` script into the WinRM session.

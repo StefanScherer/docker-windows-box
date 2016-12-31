@@ -1,12 +1,10 @@
 Vagrant.configure(2) do |config|
-  config.vm.box = "mwrock/WindowsNano"
+  #config.vm.box = "mwrock/WindowsNano"
+  config.vm.box = "nanoserver_docker"
 
-  config.vm.network "forwarded_port", guest: 2375, host: 2375
+  config.vm.network "forwarded_port", guest: 2375, host: 2375, id: "docker", auto_correct: true
 
   config.vm.provider "virtualbox" do |vb|
-    # Display the VirtualBox GUI when booting the machine
-    vb.gui = true
-
     # Customize the amount of memory on the VM:
     vb.memory = "2048"
   end
