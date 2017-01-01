@@ -8,6 +8,6 @@ Expand-Archive -Path $env:TEMP\docker-1.13.0-rc4.zip -DestinationPath $env:Progr
 Remove-Item $env:TEMP\docker-1.13.0-rc4.zip
 [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$($env:ProgramFiles)\docker", [EnvironmentVariableTarget]::Machine)
 $env:Path = $env:Path + ";$($env:ProgramFiles)\docker"
-. dockerd --register-service -H npipe:// -H 0.0.0.0:2375 -G docker --label windows
+. dockerd --register-service -H npipe:// -H 0.0.0.0:2375 -G docker --label os=windows
 
-Start-Service Docker
+Start-Service docker
