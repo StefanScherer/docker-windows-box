@@ -30,9 +30,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  subnet = "192.168.36"
+
   config.vm.provider :vcloud do |vcloud, override|
     vcloud.vapp_prefix = "windows-docker-swarm-mode"
-    vcloud.ip_subnet = "192.168.36.1/255.255.255.0" # our test subnet with fixed IP adresses for everyone
+    vcloud.ip_subnet = "#{subnet}.1/255.255.255.0" # our test subnet with fixed IP adresses for everyone
     override.vm.usable_port_range = 2200..2999
     vcloud.memory = 8192
     vcloud.cpus = 4
@@ -40,28 +42,28 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "sw-win-01" do |config|
     config.vm.hostname = "sw-win-01"
-    config.vm.network :private_network, ip: "192.168.36.2", gateway: "192.168.36.1"
-    config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "192.168.36.2"
+    config.vm.network :private_network, ip: "#{subnet}.2", gateway: "#{subnet}.1"
+    config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "#{subnet}.2"
     config.vm.provision "shell", path: "scripts/update-docker-rc.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/open-swarm-mode-ports.ps1", privileged: false
-    config.vm.provision "shell", path: "scripts/docker-swarm-init.ps1", privileged: false, args: "-ip 192.168.36.2"
+    config.vm.provision "shell", path: "scripts/docker-swarm-init.ps1", privileged: false, args: "-ip #{subnet}.2"
   end
 
   config.vm.define "sw-win-02" do |config|
     config.vm.hostname = "sw-win-02"
-    config.vm.network :private_network, ip: "192.168.36.3", gateway: "192.168.36.1"
-    config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "192.168.36.3"
+    config.vm.network :private_network, ip: "#{subnet}.3", gateway: "#{subnet}.1"
+    config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "#{subnet}.3"
     config.vm.provision "shell", path: "scripts/update-docker-rc.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/open-swarm-mode-ports.ps1", privileged: false
-    config.vm.provision "shell", path: "scripts/docker-swarm-join.ps1", privileged: false, args: "-managerip 192.168.36.2 -ip 192.168.36.3"
+    config.vm.provision "shell", path: "scripts/docker-swarm-join.ps1", privileged: false, args: "-managerip #{subnet}.2 -ip #{subnet}.3"
   end
 
   config.vm.define "sw-win-03" do |config|
     config.vm.hostname = "sw-win-03"
-    config.vm.network :private_network, ip: "192.168.36.4", gateway: "192.168.36.1"
-    config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "192.168.36.4"
+    config.vm.network :private_network, ip: "#{subnet}.4", gateway: "#{subnet}.1"
+    config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "#{subnet}.4"
     config.vm.provision "shell", path: "scripts/update-docker-rc.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/open-swarm-mode-ports.ps1", privileged: false
-    config.vm.provision "shell", path: "scripts/docker-swarm-join.ps1", privileged: false, args: "-managerip 192.168.36.2 -ip 192.168.36.4"
+    config.vm.provision "shell", path: "scripts/docker-swarm-join.ps1", privileged: false, args: "-managerip #{subnet}.2 -ip #{subnet}.4"
   end
 end
