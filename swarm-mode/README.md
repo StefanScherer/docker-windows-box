@@ -67,3 +67,19 @@ C:\vagrant\scripts\run-visualizer.ps1
 Now open a browser to see the visualizer UI. I use the IP address of the manager VM and open a browser on my host machine.
 
 ![visualizer](images/visualizer.png)
+
+## Portainer
+
+Open a PowerShell window on the `sw-win-01` machine and run the script
+
+```
+C:\vagrant\scripts\run-portainer.ps1
+```
+
+Now open a browser to see the Portainer UI. I use my host machine an the IP address 192.168.36.2
+
+![portainer](images/portainer.png)
+
+With both Visualizer and Portainer you could demonstrate scaling services
+
+![visualizer and portainer](images/visualizer-portainer.gif)
