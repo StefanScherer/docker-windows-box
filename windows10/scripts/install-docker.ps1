@@ -3,7 +3,7 @@ Set-ExecutionPolicy Bypass -scope Process
 
 New-Item -Type Directory -Path "$($env:ProgramFiles)\docker"
 $wc = New-Object net.webclient
-$wc.Downloadfile("https://test.docker.com/builds/Windows/x86_64/docker-1.13.0-rc5.zip", "$env:TEMP\docker-1.13.0-rc4.zip")
+$wc.Downloadfile("https://test.docker.com/builds/Windows/x86_64/docker-1.13.0-rc5.zip", "$env:TEMP\docker-1.13.0-rc5.zip")
 Expand-Archive -Path $env:TEMP\docker-1.13.0-rc5.zip -DestinationPath $env:ProgramFiles -Force
 Remove-Item $env:TEMP\docker-1.13.0-rc5.zip
 [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$($env:ProgramFiles)\docker", [EnvironmentVariableTarget]::Machine)
