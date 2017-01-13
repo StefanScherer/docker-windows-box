@@ -11,7 +11,7 @@ Write-Host Create win-on-lin hyperv machine
 docker-machine create -d hyperv `
   --hyperv-virtual-switch ext `
   --engine-label os=linux `
-  --hyperv-boot2docker-url https://github.com/boot2docker/boot2docker/releases/download/v1.13.0-rc6/boot2docker.iso `
+  --hyperv-boot2docker-url https://github.com/boot2docker/boot2docker/releases/download/v1.13.0-rc7/boot2docker.iso `
   lin-on-win
 
 Write-Host Initialize Linux swarm
