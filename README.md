@@ -6,9 +6,9 @@ This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016
 
 After provisioning the box has the following tools installed:
 
-* Windows Server 2016 with Docker Engine CS 1.12 and client
-* docker-machine 0.8.2
-* docker-compose 1.9.0
+* Windows Server 2016 with Docker Engine 1.13.0 and client
+* docker-machine 0.9.0
+* docker-compose 1.10.0
 * (Docker Tab completion for PowerShell (posh-docker))
 * Chocolatey
 * Git command line
@@ -17,7 +17,7 @@ After provisioning the box has the following tools installed:
 
 Optionally you can create a Hyper-V Docker Linux machine and have a multi architecture experience in one VM.
 
-Tested with Vagrant 1.8.1 (not 1.8.4), VMware Fusion Pro 8.5.0 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
+Tested with Vagrant 1.9.1, VMware Fusion Pro 8.5.3 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
 
 You can learn and play a lot of scenarios with it:
 
