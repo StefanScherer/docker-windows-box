@@ -1,6 +1,6 @@
 # docker-windows-box
 
-This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016. Have a look at my blog posts how to [Setup a local Windows 2016 TP5 Docker VM](https://stefanscherer.github.io/setup-local-windows-2016-tp5-docker-vm/) and [Adding Hyper-V support to 2016 TP5 Docker VM](https://stefanscherer.github.io/adding-hyper-v-support-to-2016-tp5-docker-vm/) for more details.
+This is a Vagrant box to test Windows Docker Containers on a Windows Server 2016. Have a look at my blog posts how to [Setup a local Windows 2016 TP5 Docker VM](https://stefanscherer.github.io/setup-local-windows-2016-tp5-docker-vm/) and [Adding Hyper-V support to 2016 TP5 Docker VM](https://stefanscherer.github.io/adding-hyper-v-support-to-2016-tp5-docker-vm/) for more details. I also can recommend a more up to date guide [Getting started with Windows Containers](http://glennsarti.github.io/blog/getting-started-with-windows-containers/) by [@glennsarti](https://github.com/glennsarti)
 
 ![](images/server2016.png)
 
