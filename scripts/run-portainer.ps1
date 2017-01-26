@@ -13,10 +13,10 @@ if (Test-Path $env:USERPROFILE\.docker\ca.pem) {
   docker run -d -p 8000:9000 `
     -v $env:USERPROFILE\.docker:C:\ProgramData\portainer\certs `
     -v C:\portainerdata:C:\data `
-    --name portainer portainer/portainer:windows `
+    --name portainer portainer/portainer `
     -H tcp://$($ip):2376 --tlsverify
 } else {
   docker run -d -p 8000:9000 `
   -v C:\portainerdata:C:\data `
-  --name portainer portainer/portainer:windows -H tcp://$($ip):2375
+  --name portainer portainer/portainer -H tcp://$($ip):2375
 }
