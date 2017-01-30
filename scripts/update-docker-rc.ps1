@@ -1,6 +1,6 @@
 Write-Host "Stopping docker service"
 Stop-Service docker
-$version = "1.13.0-rc7"
+$version = "1.13.1-rc1"
 
 Write-Host "Downloading docker-$version.zip"
 $wc = New-Object net.webclient
