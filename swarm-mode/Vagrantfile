@@ -44,8 +44,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.hostname = "sw-win-01"
     config.vm.network :private_network, ip: "#{subnet}.2", gateway: "#{subnet}.1"
     config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "#{subnet}.2"
-    config.vm.provision "shell", path: "scripts/update-docker-rc.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/open-swarm-mode-ports.ps1", privileged: false
+    config.vm.provision "shell", path: "scripts/set-experimental.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/docker-swarm-init.ps1", privileged: false, args: "-ip #{subnet}.2"
   end
 
@@ -53,8 +53,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.hostname = "sw-win-02"
     config.vm.network :private_network, ip: "#{subnet}.3", gateway: "#{subnet}.1"
     config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "#{subnet}.3"
-    config.vm.provision "shell", path: "scripts/update-docker-rc.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/open-swarm-mode-ports.ps1", privileged: false
+    config.vm.provision "shell", path: "scripts/set-experimental.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/docker-swarm-join.ps1", privileged: false, args: "-managerip #{subnet}.2 -ip #{subnet}.3"
   end
 
@@ -62,8 +62,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.hostname = "sw-win-03"
     config.vm.network :private_network, ip: "#{subnet}.4", gateway: "#{subnet}.1"
     config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "#{subnet}.4"
-    config.vm.provision "shell", path: "scripts/update-docker-rc.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/open-swarm-mode-ports.ps1", privileged: false
+    config.vm.provision "shell", path: "scripts/set-experimental.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/docker-swarm-join.ps1", privileged: false, args: "-managerip #{subnet}.2 -ip #{subnet}.4"
   end
 end
