@@ -2,21 +2,25 @@ $ip=(Get-NetIPAddress -AddressFamily IPv4 `
    | Where-Object -FilterScript { $_.InterfaceAlias -Eq "vEthernet (HNS Internal NIC)" } `
    ).IPAddress
 
-docker kill portainer
-docker rm -vf portainer
+docker service rm portainer
 
 if (!(Test-Path C:\portainerdata)) {
   mkdir C:\portainerdata
 }
 
 if (Test-Path $env:USERPROFILE\.docker\ca.pem) {
-  docker run -d -p 8000:9000 `
-    -v $env:USERPROFILE\.docker:C:\ProgramData\portainer\certs `
-    -v C:\portainerdata:C:\data `
-    --name portainer portainer/portainer `
+    # --publish 9000:9000 `
+  docker service create `
+    --constraint 'node.role == manager' `
+    --mount type=bind,src=$env:USERPROFILE\.docker,dst=C:\ProgramData\portainer\certs `
+    --mount type=bind,src=C:\portainerdata,dst=C:\data `
+    --name portainer portainer/portainer:1.11.3 `
     -H tcp://$($ip):2376 --tlsverify
 } else {
-  docker run -d -p 8000:9000 `
-  -v C:\portainerdata:C:\data `
-  --name portainer portainer/portainer -H tcp://$($ip):2375
+    # --publish 9000:9000 `
+  docker service create `
+    --constraint 'node.role == manager' `
+    --mount type=bind,src=C:\portainerdata,dst=C:\data `
+    --name portainer portainer/portainer:1.11.3 `
+    -H tcp://$($ip):2375
 }

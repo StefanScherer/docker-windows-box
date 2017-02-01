@@ -76,7 +76,13 @@ Open a PowerShell window on the `sw-win-01` machine and run the script
 C:\vagrant\scripts\run-portainer.ps1
 ```
 
-Now open a browser to see the Portainer UI. I use my host machine an the IP address 192.168.36.2
+Now open a browser to see the Portainer UI. Portainer is started as a Docker service. At the
+moment you can't use `--publish` on Windows. So we have to pick the IP address of the container
+to open it in a browser. Run the helper script
+
+```
+C:\vagrant\scripts\open-portainer-ui.ps1
+```
 
 ![portainer](images/portainer.png)
 
