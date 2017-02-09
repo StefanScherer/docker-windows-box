@@ -16,16 +16,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.guest = :windows
   config.windows.halt_timeout = 15
 
-  config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.synced_folder "..", "/vagrant"
-
   config.vm.provision "shell", path: "scripts/install-container-feature.ps1", privileged: true
   config.vm.provision "shell", path: "scripts/enable-autologon.ps1", privileged: true
   config.vm.provision "reload"
   config.vm.provision "shell", path: "scripts/add-docker-group.ps1", privileged: true
   config.vm.provision "shell", path: "scripts/install-docker.ps1", privileged: true
-  config.vm.provision "shell", path: "../scripts/install-chocolatey.ps1", privileged: false
-  config.vm.provision "shell", path: "../scripts/install-dockertools.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/install-chocolatey.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/install-dockertools.ps1", privileged: false
   config.vm.provision "reload"
 
   ["vmware_fusion", "vmware_workstation"].each do |provider|
@@ -48,5 +45,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.vmx["sound.autodetect"] = "TRUE"
     v.enable_vmrun_ip_lookup = false
     v.vmx["vhv.enable"] = "TRUE"
+  end
+
+  config.vm.provider "vcloud" do |v|
+    v.memory = 4096
+    v.cpus = 2
+    v.nested_hypervisor = true
   end
 end
