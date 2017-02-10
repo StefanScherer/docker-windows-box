@@ -1,6 +1,9 @@
 # Windows Docker swarm-mode
 
 This is a local setup using Vagrant with VMware Fusion to demonstrate a Windows Docker swarm-mode.
+See also
+  - https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/swarm-mode for latest features in Windows 10 Insider build 15031.
+  - https://blogs.technet.microsoft.com/virtualization/2017/02/09/overlay-network-driver-with-support-for-docker-swarm-mode-now-available-to-windows-insiders-on-windows-10/
 
 ## Vagrant boxes
 
