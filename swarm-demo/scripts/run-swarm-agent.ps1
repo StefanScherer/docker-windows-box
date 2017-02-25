@@ -6,4 +6,4 @@ $ip=(Get-NetIPAddress -AddressFamily IPv4 `
    ).IPAddress
 
 Write-Host "Adding host $($ip):2375 to swarm"
-docker run --restart=always -d stefanscherer/swarm-windows:1.2.5-nano join "--addr=$($ip):2375" "token://$TOKEN"
+docker run --restart=always -d stefanscherer/swarm-windows:1.2.6-nano join "--addr=$($ip):2375" "token://$TOKEN"
