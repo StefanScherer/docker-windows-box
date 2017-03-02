@@ -4,7 +4,7 @@ $ProgressPreference = 'SilentlyContinue';
 # Install-PackageProvider -Name NuGet -Force
 # Install-Module -Name xNetworking -Force
 
-$version="1.13.1"
+$version="17.03.0-ce"
 Invoke-WebRequest -UseBasicParsing https://get.docker.com/builds/Windows/x86_64/docker-$($version).zip -OutFile docker-$($version).zip
 Expand-Archive docker-$($version).zip -DestinationPath $env:ProgramFiles
 

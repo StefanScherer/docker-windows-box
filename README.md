@@ -4,11 +4,11 @@ This repo is a collection of various Vagrant environments to work with Windows C
 
 There are different Vagrantfiles for each scenario:
 
-* `Vagrantfile` - Windows Server 2016 and Docker 1.13.1
+* `Vagrantfile` - Windows Server 2016 and Docker 17.03.0-ce
 * [`nano/Vagrantfile`](nano/README.md) - Test setup to have Docker engine installed in a Windows Nanoserver VM
 * [`swarm-demo/Vagrantfile`](swarm-demo/README.md) - some Windows Server 2016 VM's in classical Docker Swarm
 * [`swarm-mode/Vagrantfile`](swarm-mode/README.md) - some Windows Server 2016 VM's in Docker Swarm-mode
-* [`windows10/Vagrantfile`](windows10/README.md) - Windows 10 and Docker 1.13.1 natively installed (see [docker-windows-beta](https://github.com/StefanScherer/docker-windows-beta)  repo if you want to try Docker 4 Windows instead)
+* [`windows10/Vagrantfile`](windows10/README.md) - Windows 10 and Docker 17.03.0-ce natively installed (see [docker-windows-beta](https://github.com/StefanScherer/docker-windows-beta)  repo if you want to try Docker 4 Windows instead)
 
 ## Introduction
 
@@ -20,7 +20,7 @@ Have a look at my blog posts how to [Setup a local Windows 2016 TP5 Docker VM](h
 
 After provisioning the box has the following tools installed:
 
-* Windows Server 2016 with Docker Engine 1.13.1 and client
+* Windows Server 2016 with Docker Engine 17.03.0-ce and client
 * docker-machine 0.9.0
 * docker-compose 1.10.0
 * (Docker Tab completion for PowerShell (posh-docker))
