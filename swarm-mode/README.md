@@ -27,12 +27,19 @@ The `sw-win-02` and `sw-win-03` are Swarm workers.
 
 ![swarm-mode](images/swarm-mode.png)
 
-## Example usage
+## Example usage: Overlay network
 
-Open a PowerShell window in the `sw-win-01` machine and create a service
+The folder `demo` contains some helper scripts to use the overlay network. Beginning with Windows Server 2016 update 1066 or Windows 10 Creators Update you can use overlay network.
+
+![overlay network](images/overlay-network.png)
+Open a PowerShell window in the `sw-win-01` machine and create a network first
 
 ```
-PS C:\> docker service create --name=whoami stefanscherer/whoami-windows:latest
+PS C:\> docker network create --driver=overlay sample
+```
+
+```
+PS C:\> docker service create --name=whoami --endpoint-mode dnsrr --network=sample stefanscherer/whoami-windows:latest
 ```
 
 Check the service
@@ -58,6 +65,30 @@ PS C:\> docker service ls
 ID            NAME    MODE        REPLICAS  IMAGE
 eptkxbn1gce5  whoami  replicated  10/10     stefanscherer/whoami-windows:latest
 ```
+
+Test overlay network from another service
+
+```
+PS C:\> docker service create --name=askthem-dnscache-disabled --network=sample stefanscherer/askthem-windows:dnscache-disabled
+```
+
+Then check the output of the service
+
+```
+PS C:\> docker service logs askthem-dnscache-disabled
+askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    | I'm eaaf40a6cc7e
+askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    |
+askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    | I'm 0816ee24a03d
+askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    |
+askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    | I'm b231230d8c73
+askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    |
+askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    | I'm eaaf40a6cc7e
+askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    |
+askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    | I'm eaaf40a6cc7e
+askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    |
+```
+
+As you can see sometimes the response comes from the other Docker host.
 
 ## Visualizer
 
