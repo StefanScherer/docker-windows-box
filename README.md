@@ -4,10 +4,10 @@ This repo is a collection of various Vagrant environments to work with Windows C
 
 There are different Vagrantfiles for each scenario:
 
-* `Vagrantfile` - Windows Server 2016 and Docker 17.03.0-ce
+* `Vagrantfile` - Windows Server 2016 and Docker 17.03.1-ee
 * [`nano/Vagrantfile`](nano/README.md) - Test setup to have Docker engine installed in a Windows Nanoserver VM
 * [`swarm-demo/Vagrantfile`](swarm-demo/README.md) - some Windows Server 2016 VM's in classical Docker Swarm
-* [`swarm-mode/Vagrantfile`](swarm-mode/README.md) - some Windows Server 2016 VM's in Docker Swarm-mode
+* [`swarm-mode/Vagrantfile`](swarm-mode/README.md) - some Windows Server 2016 VM's in Docker Swarm-mode and overlay network
 * [`windows10/Vagrantfile`](windows10/README.md) - Windows 10 and Docker 17.03.0-ce natively installed (see [docker-windows-beta](https://github.com/StefanScherer/docker-windows-beta)  repo if you want to try Docker 4 Windows instead)
 
 ## Introduction
@@ -20,9 +20,9 @@ Have a look at my blog posts how to [Setup a local Windows 2016 TP5 Docker VM](h
 
 After provisioning the box has the following tools installed:
 
-* Windows Server 2016 with Docker Engine 17.03.0-ce and client
-* docker-machine 0.9.0
-* docker-compose 1.10.0
+* Windows Server 2016 with Docker Engine 17.03.1-ee and client
+* docker-machine 0.10.0
+* docker-compose 1.12.0
 * (Docker Tab completion for PowerShell (posh-docker))
 * Chocolatey
 * Git command line
@@ -31,7 +31,7 @@ After provisioning the box has the following tools installed:
 
 Optionally you can create a Hyper-V Docker Linux machine and have a multi architecture experience in one VM.
 
-Tested with Vagrant 1.9.1, VMware Fusion Pro 8.5.3 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
+Tested with Vagrant 1.9.3, VMware Fusion Pro 8.5.6 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
 
 You can learn and play a lot of scenarios with it:
 
