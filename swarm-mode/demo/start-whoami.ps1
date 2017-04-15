@@ -1,2 +1,2 @@
 docker service create --name=whoami --endpoint-mode dnsrr `
-  --network=sample stefanscherer/whoami-windows:latest
+  --network=sample stefanscherer/whoami:latest
