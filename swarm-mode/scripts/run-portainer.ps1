@@ -1,3 +1,5 @@
+$image='portainer/portainer:1.12.4'
+
 $ip=(Get-NetIPAddress -AddressFamily IPv4 `
    | Where-Object -FilterScript { $_.InterfaceAlias -Eq "vEthernet (HNS Internal NIC)" } `
    ).IPAddress
@@ -14,13 +16,13 @@ if (Test-Path $env:USERPROFILE\.docker\ca.pem) {
     --constraint 'node.role == manager' `
     --mount type=bind,src=$env:USERPROFILE\.docker,dst=C:\ProgramData\portainer\certs `
     --mount type=bind,src=C:\portainerdata,dst=C:\data `
-    --name portainer portainer/portainer:1.11.3 `
+    --name portainer $image `
     -H tcp://$($ip):2376 --tlsverify
 } else {
     # --publish 9000:9000 `
   docker service create `
     --constraint 'node.role == manager' `
     --mount type=bind,src=C:\portainerdata,dst=C:\data `
-    --name portainer portainer/portainer:1.11.3 `
+    --name portainer $image `
     -H tcp://$($ip):2375
 }
