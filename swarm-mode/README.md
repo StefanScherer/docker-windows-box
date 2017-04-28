@@ -1,125 +1,87 @@
-# Windows Docker swarm-mode
+# Mixed Linux and Windows Docker swarm-mode
 
-This is a local setup using Vagrant with VMware Fusion to demonstrate a Windows Docker swarm-mode.
-See also
-  - https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/swarm-mode for latest features in Windows 10 Insider build 15031.
-  - https://blogs.technet.microsoft.com/virtualization/2017/02/09/overlay-network-driver-with-support-for-docker-swarm-mode-now-available-to-windows-insiders-on-windows-10/
+This is a local setup using Vagrant with VMware Fusion to demonstrate a mixed Linux and Windows Docker swarm-mode.
+
 
 ## Vagrant boxes
 
-There are three VM's with the following internal network and IP addresses:
+There are four VM's with the following internal network and IP addresses:
 
-| VM        | IP address   | Memory |
-|-----------|--------------|--------|
-| sw-win-01 | 192.168.36.2 | 2GB    |
-| sw-win-02 | 192.168.36.3 | 2GB    |
-| sw-win-03 | 192.168.36.4 | 2GB    |
+| VM        | IP address   | Memory | Type    |
+|-----------|--------------|--------|---------|
+| sw-lin-01 | 192.168.36.2 | 2GB    | Manager |
+| sw-lin-02 | 192.168.36.3 | 2GB    | Worker  |
+| sw-win-01 | 192.168.36.4 | 2GB    | Worker  |
+| sw-win-02 | 192.168.36.5 | 2GB    | Worker  |
 
-Depending on your host's memory you can spin up one or more Windows Server VM's.
+To create the four node cluster run
+
+```
+vagrant up
+```
+
+Depending on your host's memory you may want to spin up only two nodes to have a minimal Linux and Windows Server VM's.
+
+```
+vagrant up sw-lin-01 sw-win-01
+```
+
 
 ## Swarm Manager
 
-The `sw-win-01` is the Swarm manager.
+The node `sw-lin-01` is the Swarm manager.
 
 ## Swarm worker
 
-The `sw-win-02` and `sw-win-03` are Swarm workers.
+The nodes `sw-lin-02`, `sw-win-01` and `sw-win-01` are Swarm workers.
 
-![swarm-mode](images/swarm-mode.png)
+## Open Visualizer
+
+When spinning up the manager node it also starts the Docker swarm visualizer as a service. You can then open the visualizer with
+
+```
+open http://192.168.36.2:8080
+```
+
+![mixed Linux and Windows Docker swarm](images/mixed-swarm.png)
 
 ## Example usage: Overlay network
 
 The folder `demo` contains some helper scripts to use the overlay network. Beginning with Windows Server 2016 update 1066 or Windows 10 Creators Update you can use overlay network.
 
-![overlay network](images/overlay-network.png)
-Open a PowerShell window in the `sw-win-01` machine and create a network first
+The overlay network also works in a mixed Linux and Windows Docker swarm.
+
+### Create whoami service
+
+Log into the manager node with `vagrant ssh sw-lin-01` and start the service with `docker service create --name=whoami -p 8000:8000 -e PORT=8000 stefanscherer/whoami:1.2.0`
+
+Or just run the helper script from your host machine
 
 ```
-PS C:\> docker network create --driver=overlay sample
+demo/start-whoami.sh
 ```
 
-```
-PS C:\> docker service create --name=whoami --endpoint-mode dnsrr --network=sample stefanscherer/whoami-windows:latest
-```
+### Check whoami service with curl
 
-Check the service
+You can access the whoami service from your host with `curl http://192.168.36.2:8000` and it should respond with the hostname of the container and the operating system.
 
-```
-PS C:\> docker service ls
-ID            NAME    MODE        REPLICAS  IMAGE
-eptkxbn1gce5  whoami  replicated  1/1       stefanscherer/whoami-windows:latest
-```
-
-Then scale up the service
+There is a helper script that will curl twice per second. Run this script in a second terminal.
 
 ```
-PS C:\> docker service scale whoami=10
-whoami scaled to 10
-PS C:\> docker service ls
-ID            NAME    MODE        REPLICAS  IMAGE
-eptkxbn1gce5  whoami  replicated  6/10      stefanscherer/whoami-windows:latest
-PS C:\> docker service ls
-ID            NAME    MODE        REPLICAS  IMAGE
-eptkxbn1gce5  whoami  replicated  6/10      stefanscherer/whoami-windows:latest
-PS C:\> docker service ls
-ID            NAME    MODE        REPLICAS  IMAGE
-eptkxbn1gce5  whoami  replicated  10/10     stefanscherer/whoami-windows:latest
+demo/curl-whoami.sh
 ```
 
-Test overlay network from another service
+## Scale up
+
+Log into the manager node and run `docker service scale whoami=4` to scale up the service.
+
+Or use the helper script
 
 ```
-PS C:\> docker service create --name=askthem-dnscache-disabled --network=sample stefanscherer/askthem-windows:dnscache-disabled
+demo/scale-whoami.sh 4
 ```
 
-Then check the output of the service
+## Caveats
 
-```
-PS C:\> docker service logs askthem-dnscache-disabled
-askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    | I'm eaaf40a6cc7e
-askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    |
-askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    | I'm 0816ee24a03d
-askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    |
-askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    | I'm b231230d8c73
-askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    |
-askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    | I'm eaaf40a6cc7e
-askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    |
-askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    | I'm eaaf40a6cc7e
-askthem-dnscache-disabled.1.e3q8uyeg4fuf@sw-win-01    |
-```
-
-As you can see sometimes the response comes from the other Docker host.
-
-## Visualizer
-
-Open a PowerShell window on the `sw-win-01` machine and run the script
-
-```
-C:\vagrant\scripts\run-visualizer.ps1
-```
-
-Now open a browser to see the visualizer UI. I use the IP address of the manager VM and open a browser on my host machine.
-
-![visualizer](images/visualizer.png)
-
-## Portainer
-
-Open a PowerShell window on the `sw-win-01` machine and run the script
-
-```
-C:\vagrant\scripts\run-portainer.ps1
-```
-
-Now open a browser to see the Portainer UI. Portainer is started as a Docker service. At the
-moment you can't use `--publish` on Windows. So we have to pick the IP address of the container
-to open it in a browser. Run the helper script
-
-```
-C:\vagrant\scripts\open-portainer-ui.ps1
-```
-
-![portainer](images/portainer.png)
-
-With both Visualizer and Portainer you could demonstrate scaling services
-
-![visualizer and portainer](images/visualizer-portainer.gif)
+- I have a problem with Docker 17.05.0-ce-rc2 as the routing mesh doesn't seem to work. The rc1 still works.
+- I have to reboot the Windows worker nodes once to make the overlay network work. Without that reboot the curl times out when the round robin wants to connect to one of the Windows nodes.
