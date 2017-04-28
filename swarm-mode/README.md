@@ -20,7 +20,7 @@ To create the four node cluster run
 vagrant up
 ```
 
-Depending on your host's memory you may want to spin up only two nodes to have a minimal Linux and Windows Server VM's.
+Depending on your host's memory you may want to spin up only two nodes to have a minimal Linux and Windows Server cluster.
 
 ```
 vagrant up sw-lin-01 sw-win-01
@@ -81,6 +81,8 @@ Or use the helper script
 demo/scale-whoami.sh 4
 ```
 
+
+This is an example with `docker swarm scale whoami=3` getting responses from both Linux and Windows nodes:
 ![Overlay network](images/overlay-network.png)
 
 ## Caveats
