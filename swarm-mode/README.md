@@ -83,9 +83,10 @@ demo/scale-whoami.sh 4
 
 
 This is an example with `docker swarm scale whoami=3` getting responses from both Linux and Windows nodes:
+
 ![Overlay network](images/overlay-network.png)
 
 ## Caveats
 
-- I have a problem with Docker 17.05.0-ce-rc2 as the routing mesh doesn't seem to work. The rc1 still works.
+- I have a [problem with Docker 17.05.0-ce-rc2](https://github.com/moby/moby/issues/32918) as the routing mesh doesn't seem to work. The rc1 still works.
 - I have to reboot the Windows worker nodes once to make the overlay network work. Without that reboot the curl times out when the round robin wants to connect to one of the Windows nodes.
