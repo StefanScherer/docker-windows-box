@@ -81,6 +81,8 @@ Or use the helper script
 demo/scale-whoami.sh 4
 ```
 
+![Overlay network](images/overlay-network.png)
+
 ## Caveats
 
 - I have a problem with Docker 17.05.0-ce-rc2 as the routing mesh doesn't seem to work. The rc1 still works.
