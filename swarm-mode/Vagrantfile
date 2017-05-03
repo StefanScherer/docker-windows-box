@@ -45,6 +45,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
     end
     config.vm.network :private_network, ip: "#{subnet}.2", gateway: "#{subnet}.1"
+    config.vm.network :forwarded_port, guest: 2375, host: 2375, id: "dockerinsecure", auto_correct: true
     config.vm.network :forwarded_port, guest: 8080, host: 8080, id: "visualizer", auto_correct: true
     config.vm.network :forwarded_port, guest: 8000, host: 8000, id: "whoami", auto_correct: true
     config.vm.provision "shell", path: "scripts/install-docker.sh", privileged: false
@@ -75,7 +76,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision "shell", path: "scripts/docker-swarm-join.ps1", privileged: false, args: "-managerip #{subnet}.2 -ip #{subnet}.4"
     # config.vm.provision "shell", path: "scripts/docker-swarm-init.ps1", privileged: false, args: "-ip #{subnet}.4"
     # at the moment we need to reboot the new swarm worker
-    # config.vm.provision "reload"
+    config.vm.provision "reload"
   end
 
   config.vm.define "sw-win-02" do |config|
