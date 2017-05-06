@@ -72,7 +72,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network :private_network, ip: "#{subnet}.4", gateway: "#{subnet}.1"
     config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "#{subnet}.4"
     config.vm.provision "shell", path: "scripts/open-swarm-mode-ports.ps1", privileged: false
-    config.vm.provision "shell", path: "scripts/update-docker-rc.ps1", privileged: false, args: "-managerip #{subnet}.2 -ip #{subnet}.4"
+    config.vm.provision "shell", path: "scripts/update-docker-ce.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/docker-swarm-join.ps1", privileged: false, args: "-managerip #{subnet}.2 -ip #{subnet}.4"
     # config.vm.provision "shell", path: "scripts/docker-swarm-init.ps1", privileged: false, args: "-ip #{subnet}.4"
     # at the moment we need to reboot the new swarm worker
@@ -84,7 +84,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network :private_network, ip: "#{subnet}.5", gateway: "#{subnet}.1"
     config.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "#{subnet}.5"
     config.vm.provision "shell", path: "scripts/open-swarm-mode-ports.ps1", privileged: false
-    config.vm.provision "shell", path: "scripts/update-docker-rc.ps1", privileged: false, args: "-managerip #{subnet}.2 -ip #{subnet}.4"
+    config.vm.provision "shell", path: "scripts/update-docker-ce.ps1", privileged: false
     config.vm.provision "shell", path: "scripts/docker-swarm-join.ps1", privileged: false, args: "-managerip #{subnet}.2 -ip #{subnet}.5"
     # at the moment we need to reboot the new swarm worker
     config.vm.provision "reload"
