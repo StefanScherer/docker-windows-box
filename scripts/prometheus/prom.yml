@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 5s
+  external_labels:
+    monitor: 'local-monitor'
+
+# A scrape configuration containing exactly one endpoint to scrape:
+scrape_configs:
+  - job_name: 'WindowsDockerHost'
+    static_configs:
+      - targets: ['[DOCKER_HOST]:9999']
