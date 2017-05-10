@@ -1,0 +1,27 @@
+version: "3.2"
+services:
+
+  askthem:
+    image: stefanscherer/askthem-windows:dnscache-disabled
+    depends_on:
+      - whoami
+    networks:
+      - demo
+    deploy:
+      placement:
+        constraints: [node.platform.OS == windows]
+
+  whoami:
+    image: stefanscherer/whoami
+    networks:
+      - demo
+    environment:
+      - PORT=8000
+    deploy:
+      endpoint_mode: dnsrr
+      placement:
+        constraints: [node.platform.OS == linux]
+
+networks:
+  demo:
+    driver: overlay
