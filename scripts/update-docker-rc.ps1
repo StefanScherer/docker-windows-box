@@ -1,10 +1,11 @@
 Write-Host "Stopping docker service"
 Stop-Service docker
-$version = "17.04.0-ce-rc2"
+$version = "17.06.0-ce-rc2"
 
 Write-Host "Downloading docker-$version.zip"
 $wc = New-Object net.webclient
-$wc.DownloadFile("https://test.docker.com/builds/Windows/x86_64/docker-$version.zip", "$env:TEMP\docker-$version.zip")
+# $wc.DownloadFile("https://test.docker.com/builds/Windows/x86_64/docker-$version.zip", "$env:TEMP\docker-$version.zip")
+$wc.DownloadFile("https://github.com/StefanScherer/dockerfiles-windows/releases/download/2017-05-17-docker-manifest/docker-$version.zip", "$env:TEMP\docker-$version.zip")
 Write-Host "Extracting docker-$version.zip"
 Expand-Archive -Path "$env:TEMP\docker-$version.zip" -DestinationPath $env:ProgramFiles -Force
 Remove-Item "$env:TEMP\docker-$version.zip"
