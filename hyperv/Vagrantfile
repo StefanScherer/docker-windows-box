@@ -1,0 +1,37 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.require_version ">= 1.7.4"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box          = "windows_2016_hyperv"
+  config.vm.communicator = "winrm"
+
+  ["vmware_fusion", "vmware_workstation"].each do |provider|
+    config.vm.provider provider do |v, override|
+      v.gui = false
+      v.vmx["memsize"] = "2048"
+      v.vmx["numvcpus"] = "2"
+      v.vmx["vhv.enable"] = "TRUE"
+      v.enable_vmrun_ip_lookup = false
+      v.linked_clone = true
+    end
+  end
+
+  config.vm.provider "virtualbox" do |v|
+    v.gui = false
+    v.customize ["modifyvm", :id, "--memory", 2048]
+    v.customize ["modifyvm", :id, "--cpus", 2]
+    v.linked_clone = true
+  end
+
+  config.vm.provider "hyperv" do |v|
+    v.cpus = 2
+    v.maxmemory = 2048
+    v.differencing_disk = true
+  end
+
+  config.vm.provision "shell", path: "scripts/install-docker.ps1"
+end
