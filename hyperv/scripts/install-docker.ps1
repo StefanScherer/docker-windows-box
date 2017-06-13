@@ -1,4 +1,4 @@
-$version = "17.06.0-ce-rc2"
+$version = "17.06.0-ce-rc3"
 New-Item -Type Directory -Path "$($env:ProgramFiles)\docker"
 $wc = New-Object net.webclient
 Write-Host Downloading Docker $version
