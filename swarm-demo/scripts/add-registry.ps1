@@ -3,10 +3,17 @@ $ip = "192.168.36.2"
 # I know this could be done with vagrant-hostmanager
 Add-Content C:\Windows\system32\drivers\etc\hosts "`r`n$ip registry"
 
-Write-Host "Add Docker Registry"
-$path = (Get-ItemProperty -Path HKLM:SYSTEM\CurrentControlSet\Services\docker -Name ImagePath).ImagePath
-$path += ' --insecure-registry registry:5000'
-Set-ItemProperty -Path HKLM:SYSTEM\CurrentControlSet\Services\docker -Name ImagePath -Value $path -Force
+Write-Host "Stopping docker service"
+Stop-Service docker
 
-Write-Host "Restarting docker"
-Restart-Service docker
+Write-Host "Adding insecure registry"
+$daemonJson = "$env:ProgramData\docker\config\daemon.json"
+$config = @{}
+if (Test-Path $daemonJson) {
+  $config = (Get-Content $daemonJson) -join "`n" | ConvertFrom-Json
+}
+$config = $config | Add-Member(@{ 'insecure-registries' = @( 'registry:5000' ) }) -Force -PassThru
+$config | ConvertTo-Json | Set-Content $daemonJson -Encoding Ascii
+
+Write-Host "Starting docker service"
+Start-Service docker
