@@ -51,6 +51,8 @@ mkdir host
 
 ### Run a Linux container
 
+On the Windows 10 host run a Linux container and bind mount the folder as `/test` in the Linux container.
+
 ```
 docker run -it -v C:\host:/test alpine sh
 ```
@@ -58,10 +60,12 @@ docker run -it -v C:\host:/test alpine sh
 In the Linux container create a file
 
 ```
-$ uname -a > test/hello-from-linux.txt
+uname -a > test/hello-from-linux.txt
 ```
 
 ### Run a Windows container
+
+On the Windows 10 host run a Windows container and bind mount the folder as `C:\test` in the Windows container.
 
 ```
 docker run -i -v C:\host:C:\test microsoft/nanoserver:1709 cmd
@@ -71,4 +75,21 @@ In the Windows container create a file
 
 ```
 ver > test\hello-from-windows.txt
+```
+
+### Result
+
+On the Windows 10 host list the files in the shared folder
+
+```
+PS C:\> dir host
+
+
+    Directory: C:\host
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----        1/21/2018   4:32 AM             85 hello-from-linux.txt
+-a----        1/21/2018   4:33 AM             46 hello-from-windows.txt
 ```
