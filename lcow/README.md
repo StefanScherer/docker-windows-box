@@ -4,7 +4,7 @@ Linux Containers on Windows (LCOW) works on Windows 10 1709 and a Docker
 engine that has the pull request [moby/moby#34859](https://github.com/moby/moby/pull/34859)
 merged in.
 
-At the moment we can use the nightly builds from [master.dockerproject.com](https://master.dockerproject.com).
+At the moment we can use the nightly builds from [master.dockerproject.com](https://master.dockerproject.com) with experimental features turned on.
 
 Additionally we need a LinuxKit based Linux image for LCOW. The latest can be found in the pull request [linuxkit/lcow#6](https://github.com/linuxkit/lcow/pull/6).
 
