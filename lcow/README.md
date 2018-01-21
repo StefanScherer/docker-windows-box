@@ -6,7 +6,7 @@ merged in.
 
 At the moment we can use the nightly builds from [master.dockerproject.com](https://master.dockerproject.com).
 
-To run Linux containers we also need a small Linux VM which is part of the Docker EE 17.10 Preview.
+Additionally we need a LinuxKit based Linux image for LCOW. The latest can be found in the pull request [linuxkit/lcow#6](https://github.com/linuxkit/lcow/pull/6).
 
 ![LCOW on Windows 10](images/lcow.png)
 
