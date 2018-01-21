@@ -1,10 +1,10 @@
 Set-ExecutionPolicy Bypass -scope Process
 $ProgressPreference = 'SilentlyContinue';
 
-Write-Host "Downloading docker preview with Linux containers ..."
-Invoke-WebRequest -OutFile "$env:TEMP\docker-17.10.0-ee-preview-3.zip" "https://download.docker.com/components/engine/windows-server/preview/docker-17.10.0-ee-preview-3.zip"
-Expand-Archive -Path "$env:TEMP\docker-17.10.0-ee-preview-3.zip" -DestinationPath $env:ProgramFiles -Force
-Remove-Item "$env:TEMP\docker-17.10.0-ee-preview-3.zip"
+Write-Host "Downloading LCOW LinuxKit ..."
+Invoke-WebRequest -OutFile "$env:TEMP\linuxkit-lcow.zip" "https://23-111085629-gh.circle-artifacts.com/0/release.zip"
+Expand-Archive -Path "$env:TEMP\linuxkit-lcow.zip" -DestinationPath "$env:ProgramFiles\Linux Containers" -Force
+Remove-Item "$env:TEMP\linuxkit-lcow.zip"
 
 Write-Host "Downloading docker nightly ..."
 Invoke-WebRequest -OutFile "$env:TEMP\docker-master.zip" "https://master.dockerproject.com/windows/x86_64/docker.zip"
