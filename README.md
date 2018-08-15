@@ -57,6 +57,7 @@ To build the base box you have to run these commands on your host machine:
 ```
 git clone https://github.com/StefanScherer/packer-windows
 cd packer-windows
+# run `brew cask install vmware-fusion` if necessary to install /Applications/VMware Fusion.app
 packer build --only=vmware-iso windows_2016_docker.json
 vagrant box add windows_2016_docker windows_2016_docker_vmware.box
 ```
