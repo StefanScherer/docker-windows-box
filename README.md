@@ -50,15 +50,23 @@ For the next step you need [Packer](https://packer.io). You have several ways ho
 brew install packer
 ```
 
-If you don't have the Vagrant `windows_2016_docker` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
+If you don't have the Vagrant `windows_2016` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
 
 To build the base box you have to run these commands on your host machine:
 
 ```
 git clone https://github.com/StefanScherer/packer-windows
 cd packer-windows
-packer build --only=vmware-iso windows_2016_docker.json
-vagrant box add windows_2016_docker windows_2016_docker_vmware.box
+packer build --only=vmware-iso windows_2016.json
+vagrant box add windows_2016 windows_2016_vmware.box
+```
+
+## Install Vagrant reload plugin
+
+As we need to reboot the VM once you will need an additional Vagrant plugin
+
+```bash
+vagrant plugin install vagrant-reload
 ```
 
 ## Spin up the box

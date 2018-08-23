@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.require_version ">= 1.7.4"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box          = "StefanScherer/windows_2016_docker"
+  config.vm.box          = "StefanScherer/windows_2016"
   config.vm.communicator = "winrm"
 
   ["vmware_fusion", "vmware_workstation"].each do |provider|
@@ -48,9 +48,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.differencing_disk = true
   end
 
+  config.vm.provision "shell", path: "scripts/install-containers-feature.ps1"
+  config.vm.provision "reload"
   config.vm.provision "shell", path: "scripts/install-chocolatey.ps1"
   config.vm.provision "shell", path: "scripts/install-git.ps1"
   config.vm.provision "shell", path: "scripts/install-dockertools.ps1"
+  config.vm.provision "shell", path: "scripts/install-docker.ps1"
   config.vm.provision "shell", path: "scripts/install-atom.ps1"
   config.vm.provision "shell", path: "scripts/set-dns.ps1"
   config.vm.provision "shell", path: "scripts/insert-ssh-key.ps1"
