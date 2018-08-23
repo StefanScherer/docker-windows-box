@@ -4,7 +4,7 @@ This repo is a collection of various Vagrant environments to work with Windows C
 
 There are different Vagrantfiles for each scenario:
 
-* `Vagrantfile` - Windows Server 2016 and Docker 17.10.0-ce
+* `Vagrantfile` - Windows Server 2016 and Docker 18.03.0-ee
 * [`lcow/Vagrantfile`](lcow/README.md) - Windows 10 1709 with nightly Docker and LCOW enabled
 * [`nano/Vagrantfile`](nano/README.md) - Test setup to have Docker engine installed in a Windows Nanoserver VM
 * [`swarm-demo/Vagrantfile`](swarm-demo/README.md) - some Windows Server 2016 VM's in classical Docker Swarm
@@ -44,26 +44,13 @@ Future work will be a Docker Swarm with both Linux and Windows Docker Engines...
 
 First register to [evaluate Windows 2016](https://www.microsoft.com/evalcenter/evaluate-windows-server-2016), but you don't need to download the ISO manually.
 
-For the next step you need [Packer](https://packer.io). You have several ways how to install it. The easiest way is to install it via [Homebrew](http://brew.sh/). After you have installed Homebrew. Run the following command when you installed Homebrew:
+The Vagrant base box is available in Vagrant Cloud https://app.vagrantup.com/StefanScherer, these are all eval versions of Windows 2016 or Windows 10.
 
-```bash
-brew install packer
-```
-
-If you don't have the Vagrant `windows_2016` base box you need to create it first with [Packer](https://packer.io). See my [packer-windows](https://github.com/StefanScherer/packer-windows) repo to build the base box.
-
-To build the base box you have to run these commands on your host machine:
-
-```
-git clone https://github.com/StefanScherer/packer-windows
-cd packer-windows
-packer build --only=vmware-iso windows_2016.json
-vagrant box add windows_2016 windows_2016_vmware.box
-```
+Vagrant will download the base box if it's not available locally, a `vagrant box list` shows which boxes you already have downloaded.
 
 ## Install Vagrant reload plugin
 
-As we need to reboot the VM once you will need an additional Vagrant plugin
+As we need to reboot the VM once during the provisioning, you will need an additional Vagrant plugin
 
 ```bash
 vagrant plugin install vagrant-reload
@@ -87,7 +74,7 @@ You may clone my [dockerfiles-windows](https://github.com/StefanScherer/dockerfi
 git clone https://github.com/StefanScherer/dockerfiles-windows
 cd dockerfiles-windows
 cd node
-.\build.bat
+.\build.ps1
 ```
 
 ## Test the nightly Windows Docker Engine
