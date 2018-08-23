@@ -48,15 +48,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.differencing_disk = true
   end
 
-  config.vm.provision "shell", path: "scripts/install-containers-feature.ps1"
+  config.vm.provision "shell", path: "scripts/install-containers-feature.ps1", privileged: false
   config.vm.provision "reload"
-  config.vm.provision "shell", path: "scripts/install-chocolatey.ps1"
-  config.vm.provision "shell", path: "scripts/install-git.ps1"
-  config.vm.provision "shell", path: "scripts/install-dockertools.ps1"
-  config.vm.provision "shell", path: "scripts/install-docker.ps1"
-  config.vm.provision "shell", path: "scripts/install-atom.ps1"
-  config.vm.provision "shell", path: "scripts/set-dns.ps1"
-  config.vm.provision "shell", path: "scripts/insert-ssh-key.ps1"
+  config.vm.provision "shell", path: "scripts/install-docker.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/add-docker-group.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/install-chocolatey.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/install-git.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/install-dockertools.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/install-atom.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/set-dns.ps1", privileged: false
+  config.vm.provision "shell", path: "scripts/insert-ssh-key.ps1", privileged: false
   # config.vm.provision "shell", path: "scripts/install-posh-docker.ps1", privileged: false
   # config.vm.provision "shell", path: "scripts/install-posh-git.ps1", privileged: false
   #config.vm.provision "shell", path: "scripts/create-hyperv-linux-docker-machine.ps1", privileged: false
