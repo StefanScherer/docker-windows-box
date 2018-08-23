@@ -21,9 +21,9 @@ Have a look at my blog posts how to [Setup a local Windows 2016 TP5 Docker VM](h
 
 After provisioning the box has the following tools installed:
 
-* Windows Server 2016 with Docker Engine 17.10.0-ce and client
-* docker-machine 0.13.0
-* docker-compose 1.18.0
+* Windows Server 2016 with Docker Engine 18.03.0-ee and client
+* docker-machine 0.15.0
+* docker-compose 1.22.0
 * (Docker Tab completion for PowerShell (posh-docker))
 * Chocolatey
 * Git command line
@@ -32,7 +32,7 @@ After provisioning the box has the following tools installed:
 
 Optionally you can create a Hyper-V Docker Linux machine and have a multi architecture experience in one VM.
 
-Tested with Vagrant 1.9.3, VMware Fusion Pro 8.5.6 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
+Tested with Vagrant 2.1.2, VMware Fusion Pro 10.1.3 on a MacBookPro with Retina display. The Vagrant box will be started in fullscreen mode also with Retina support.
 
 You can learn and play a lot of scenarios with it:
 
