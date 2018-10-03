@@ -1,11 +1,11 @@
 # docker-windows-box
 
-This repo is a collection of various Vagrant environments to work with Windows Containers on a Windows Server 2016 or Windows 10 VM.
+This repo is a collection of various Vagrant environments to work with Windows Containers on a Windows Server 2019 or Windows 10 VM.
 
 There are different Vagrantfiles for each scenario:
 
-* `Vagrantfile` - Windows Server 2016 and Docker 18.03.0-ee
-* [`lcow/Vagrantfile`](lcow/README.md) - Windows 10 1709 with nightly Docker and LCOW enabled
+* `Vagrantfile` - Windows Server 2019 and Docker 18.03.0-ee-3
+* [`lcow/Vagrantfile`](lcow/README.md) - Windows 10 with nightly Docker and LCOW enabled
 * [`nano/Vagrantfile`](nano/README.md) - Test setup to have Docker engine installed in a Windows Nanoserver VM
 * [`swarm-demo/Vagrantfile`](swarm-demo/README.md) - some Windows Server 2016 VM's in classical Docker Swarm
 * [`swarm-mode/Vagrantfile`](swarm-mode/README.md) - some Windows Server 2016 VM's in Docker Swarm-mode and overlay network
@@ -21,7 +21,7 @@ Have a look at my blog posts how to [Setup a local Windows 2016 TP5 Docker VM](h
 
 After provisioning the box has the following tools installed:
 
-* Windows Server 2016 with Docker Engine 18.03.0-ee and client
+* Windows Server 2019 with Docker Engine 18.03.0-ee and client
 * docker-machine 0.15.0
 * docker-compose 1.22.0
 * (Docker Tab completion for PowerShell (posh-docker))
@@ -42,9 +42,9 @@ Future work will be a Docker Swarm with both Linux and Windows Docker Engines...
 
 ## Get the base box
 
-First register to [evaluate Windows 2016](https://www.microsoft.com/evalcenter/evaluate-windows-server-2016), but you don't need to download the ISO manually.
+First register to [evaluate Windows 2019](https://www.microsoft.com/evalcenter/evaluate-windows-server-2019), but you don't need to download the ISO manually.
 
-The Vagrant base box is available in Vagrant Cloud https://app.vagrantup.com/StefanScherer, these are all eval versions of Windows 2016 or Windows 10.
+The Vagrant base box is available in Vagrant Cloud https://app.vagrantup.com/StefanScherer, these are all eval versions of Windows Server 2019 or Windows 10.
 
 Vagrant will download the base box if it's not available locally, a `vagrant box list` shows which boxes you already have downloaded.
 
