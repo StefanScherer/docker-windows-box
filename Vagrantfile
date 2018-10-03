@@ -1,12 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-VAGRANTFILE_API_VERSION = "2"
-
 Vagrant.require_version ">= 1.7.4"
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box          = "StefanScherer/windows_2016"
+Vagrant.configure("2") do |config|
+  config.vm.box          = "StefanScherer/windows_2019"
   config.vm.communicator = "winrm"
 
   ["vmware_fusion", "vmware_workstation"].each do |provider|
