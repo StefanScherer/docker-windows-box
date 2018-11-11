@@ -1,5 +1,5 @@
 $docker_provider = "ee"
-$docker_version = "18-03-1-ee-3"
+$docker_version = "18-09-0"
 if (Test-Path env:docker_provider) {
   $docker_provider = $env:docker_provider  
 }

@@ -4,7 +4,7 @@ This repo is a collection of various Vagrant environments to work with Windows C
 
 There are different Vagrantfiles for each scenario:
 
-* `Vagrantfile` - Windows Server 2019 and Docker 18.03.0-ee-3
+* `Vagrantfile` - Windows Server 2019 and Docker 18.09.0
 * [`lcow/Vagrantfile`](lcow/README.md) - Windows 10 with nightly Docker and LCOW enabled
 * [`nano/Vagrantfile`](nano/README.md) - Test setup to have Docker engine installed in a Windows Nanoserver VM
 * [`swarm-demo/Vagrantfile`](swarm-demo/README.md) - some Windows Server 2016 VM's in classical Docker Swarm
@@ -21,9 +21,9 @@ Have a look at my blog posts how to [Setup a local Windows 2016 TP5 Docker VM](h
 
 After provisioning the box has the following tools installed:
 
-* Windows Server 2019 with Docker Engine 18.03.0-ee and client
-* docker-machine 0.15.0
-* docker-compose 1.22.0
+* Windows Server 2019 with Docker Engine 18.09.0 and client
+* docker-machine 0.16.0
+* docker-compose 1.23.0
 * (Docker Tab completion for PowerShell (posh-docker))
 * Chocolatey
 * Git command line
