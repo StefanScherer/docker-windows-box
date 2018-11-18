@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "osx1013-desktop"
+  config.ssh.insert_key = false
+
+  config.vm.provision "shell", inline: <<-SHELL, privileged: false
+    printf "\n\n" | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew cask install vmware-fusion
+    brew install docker
+    brew install docker-machine
+    curl -Lo /usr/local/bin/docker-machine-0.13.0 https://github.com/docker/machine/releases/download/v0.13.0/docker-machine-Darwin-x86_64
+    curl -Lo /usr/local/bin/docker-machine-0.14.0 https://github.com/docker/machine/releases/download/v0.14.0/docker-machine-Darwin-x86_64
+    curl -Lo /usr/local/bin/docker-machine-0.15.0 https://github.com/docker/machine/releases/download/v0.15.0/docker-machine-Darwin-x86_64
+    curl -Lo /usr/local/bin/docker-machine-0.16.0 https://github.com/docker/machine/releases/download/v0.16.0/docker-machine-Darwin-x86_64
+    chmod +x /usr/local/bin/docker-machine-*    
+  SHELL
+
+  config.vm.provider "vmware_fusion" do |v|
+    v.gui = true
+    v.vmx["memsize"] = "4096"
+    v.vmx["numvcpus"] = "2"
+    v.vmx["vhv.enable"] = "TRUE"
+    v.vmx["gui.fitguestusingnativedisplayresolution"] = "TRUE"
+  end
+end

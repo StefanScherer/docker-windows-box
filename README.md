@@ -10,7 +10,9 @@ There are different Vagrantfiles for each scenario:
 * [`swarm-demo/Vagrantfile`](swarm-demo/README.md) - some Windows Server 2016 VM's in classical Docker Swarm
 * [`swarm-mode/Vagrantfile`](swarm-mode/README.md) - some Windows Server 2016 VM's in Docker Swarm-mode and overlay network
 * [`windows10/Vagrantfile`](windows10/README.md) - Windows 10 and Docker 17.10.0-ce natively installed (see [docker-windows-beta](https://github.com/StefanScherer/docker-windows-beta) repo if you want to try Docker 4 Windows instead)
-* [`docker-machine/Vagrantfile`](docker-machine/README.md) - Windows 10 with `docker-machine` installed to test with VMware Workstation
+* docker-machine test environments
+  * [`docker-machine/Vagrantfile`](docker-machine/README.md) - Windows 10 with `docker-machine` installed to test with VMware Workstation
+  * [`docker-machine-fusion/Vagrantfile`](docker-machine-fusion/README.md) - macOS 10.13 with `docker-machine` installed to test with VMware Fusion
 
 ## Introduction
 
