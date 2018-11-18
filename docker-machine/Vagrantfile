@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
     choco install -y docker -version 17.10.0
     choco install -y docker-machine -version 0.13.0
     choco install -y docker-machine-vmwareworkstation
+    choco install -y docker-machine-vmware
   SHELL
   
   ["vmware_fusion", "vmware_workstation"].each do |provider|
