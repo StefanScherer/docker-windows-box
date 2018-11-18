@@ -33,7 +33,6 @@ start C:\Users\vagrant\.docker\machine\machines\test\test.vmx
 If that works try if the shared folder is mounted in the boot2docker VM:
 
 ```
-docker-machine env test | iex
 docker-machine ssh test ls /Users
 ```
 
@@ -41,7 +40,7 @@ If that also works try to run a container with a shared folder mounted:
 
 ```
 docker-machine env test | iex
-docker run --rm -v "/Users/vagrant:/code" alpine ls /code
+docker run --rm -v /Users:/Users alpine ls /Users
 ```
 
 If that also works you found a working combination.
