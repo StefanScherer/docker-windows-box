@@ -1,12 +1,21 @@
 # Docker on Windows 10
 
-This `Vagrantfile` installs Docker Engine on Windows 10 1709 or newer
+This `Vagrantfile` installs the nightly Docker Engine on Windows 10 1809 or newer
 as described in https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start_windows_10
 
-You need a Vagrant box with Windows 10 1709.
+You need a Vagrant box with Windows 10 1809.
 
 ```
 vagrant up
+```
+
+## Run Windows containers with process isolation
+
+With Pull request [38000](https://github.com/moby/moby/pull/38000) the process isolation is also allowed for Windows 10 1809 and newer. At the moment the nightly Docker Engine is needed until
+it gets [backported to 18.09](https://github.com/docker/engine/pull/81).
+ 
+```
+docker run --isolation process mcr.microsoft.com/windows/nanoserver:1809 ipconfig
 ```
 
 ## Docker Swarm-Mode with Linux and Windows
