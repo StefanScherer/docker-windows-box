@@ -13,6 +13,7 @@ There are different Vagrantfiles for each scenario:
 * docker-machine test environments
   * [`docker-machine/Vagrantfile`](docker-machine/README.md) - Windows 10 with `docker-machine` installed to test with VMware Workstation
   * [`docker-machine-fusion/Vagrantfile`](docker-machine-fusion/README.md) - macOS 10.13 with `docker-machine` installed to test with VMware Fusion
+* [`wsl2/Vagrantfile`](wsl2/README.md) - Windows 10 Home Insider Preview with WSL 2
 
 ## Introduction
 
