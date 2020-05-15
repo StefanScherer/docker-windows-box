@@ -5,6 +5,9 @@ This repo is a collection of various Vagrant environments to work with Windows C
 There are different Vagrantfiles for each scenario:
 
 * `Vagrantfile` - Windows Server 2019 and Docker 18.09.0
+* WSL 2
+  * [`wsl2/server/Vagrantfile`](wsl2/server/README.md) - Windows Server Core, version 2004 with WSL 2
+  * [`wsl2/windows10/Vagrantfile`](wsl2/windows10/README.md) - Windows 10, version 2004 with WSL 2
 * [`lcow/Vagrantfile`](lcow/README.md) - Windows 10 with nightly Docker and LCOW enabled
 * [`nano/Vagrantfile`](nano/README.md) - Test setup to have Docker engine installed in a Windows Nanoserver VM
 * [`swarm-demo/Vagrantfile`](swarm-demo/README.md) - some Windows Server 2016 VM's in classical Docker Swarm
@@ -13,7 +16,6 @@ There are different Vagrantfiles for each scenario:
 * docker-machine test environments
   * [`docker-machine/Vagrantfile`](docker-machine/README.md) - Windows 10 with `docker-machine` installed to test with VMware Workstation
   * [`docker-machine-fusion/Vagrantfile`](docker-machine-fusion/README.md) - macOS 10.13 with `docker-machine` installed to test with VMware Fusion
-* [`wsl2/Vagrantfile`](wsl2/README.md) - Windows 10 Home Insider Preview with WSL 2
 
 ## Introduction
 
