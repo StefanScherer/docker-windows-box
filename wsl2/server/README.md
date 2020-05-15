@@ -13,7 +13,7 @@ docker run --isolation hyperv hello-world:nanoserver
 
 ## Linux Containers
 
-You can run Linux Containers using WSL 2.
+You can run Linux Containers using Docker CE in WSL 2.
 
 Use the cmd terminal and run
 
