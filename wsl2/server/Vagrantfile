@@ -1,0 +1,76 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$script = <<SCRIPT
+Write-Host "Enabling WSL 2 feature."
+Install-WindowsFeature -Name Microsoft-Windows-Subsystem-Linux
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+Write-Host "Enabling Hyper-V and Containers feature."
+Install-WindowsFeature -Name Containers
+Install-WindowsFeature -Name Hyper-V -IncludeManagementTools
+
+Write-Host "Installing Docker"
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
+Set-PSRepository -InstallationPolicy Trusted -Name PSGallery
+$ErrorActionStop = 'SilentlyContinue'
+Install-Package -Name docker -ProviderName DockerMsftProvider -Force
+Set-PSRepository -InstallationPolicy Untrusted -Name PSGallery  
+
+. sc.exe config winrm start= delayed-auto
+SCRIPT
+
+$script2 = <<SCRIPT2
+. sc.exe config winrm start= auto
+
+Write-Host "Installing WSL Linux kernel update"
+curl.exe -o wsl_update_x64.msi https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+Start-Process msiexec.exe -Wait -ArgumentList '/I wsl_update_x64.msi /qn'
+Remove-Item wsl_update_x64.msi
+
+Write-Host "Set WSL default version 2"
+wsl --set-default-version 2
+
+mkdir c:\\distro
+cd c:\\distro
+Write-Host "Downloading Ubuntu 20.04 WSL distro"
+curl.exe -L -o ubuntu2004.tar.gz https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64-wsl.rootfs.tar.gz
+
+Write-Host "Importing Ubuntu 20.04 WSL distro"
+wsl --import Ubuntu-20.04 C:\\distro\\ubuntu20.04 ubuntu2004.tar.gz --version 2
+
+Remove-Item ubuntu2004.tar.gz
+
+Write-Host "Installing Docker in WSL distro"
+wsl -d Ubuntu-20.04 curl -o get-docker-com.sh https://get.docker.com
+wsl -d Ubuntu-20.04 chmod +x get-docker-com.sh
+wsl -d Ubuntu-20.04 DOWNLOAD_URL=https://download-stage.docker.com REPO_FILE=docker-ce-staging.repo ./get-docker-com.sh
+wsl -d Ubuntu-20.04 service docker start
+
+SCRIPT2
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "windows_server_2004"
+
+  config.vm.communicator = "winrm"
+
+  config.winrm.username = "vagrant"
+  config.winrm.password = "vagrant"
+
+  config.vm.guest = :windows
+  config.windows.halt_timeout = 15
+
+  config.vm.provision "shell", inline: $script, privileged: false
+  config.vm.provision "reload"
+  config.vm.provision "shell", inline: $script2, privileged: true, powershell_elevated_interactive: true
+
+  ["vmware_fusion", "vmware_workstation"].each do |provider|
+    config.vm.provider provider do |v, override|
+      v.gui = true
+      v.memory = "5120"
+      v.cpus = "2"
+      v.vmx["vhv.enable"] = "TRUE"
+    end
+  end
+end

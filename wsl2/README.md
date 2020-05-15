@@ -1,24 +1,11 @@
-# WSL 2
+# WSL 2 - Windows Subsystem for Linux version 2
 
-Test WSL 2 on a Windows 10 Home Insider Preview box.
+There are two scenarios to play with
 
-```
-vagrant up
-```
+## Windows 10, version 2004
 
-In the box open an admin terminal and run `Ubuntu1804.exe` to start first WSL.
+Windows 10, version 2004 with Enterprise/Pro or Home can run Docker Desktop with WSL 2 backend.
 
-At the moment you cannot install Docker Desktop on Windows 10 Home, so you 
-might want to try at least
+## Windows Server, version 2004
 
-```
-curl https://get.docker.com | sh
-sudo usermod -aG docker $USER
-```
-
-Then in a new bash run
-
-```
-sudo service docker start
-docker version
-```
+Windows Server Core with Docker EE for Windows Containers and Docker running in WSL 2.
