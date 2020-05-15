@@ -61,9 +61,9 @@ Vagrant.configure("2") do |config|
   config.vm.guest = :windows
   config.windows.halt_timeout = 15
 
-  config.vm.provision "shell", inline: $script, privileged: false
+  config.vm.provision "shell", inline: $script
   config.vm.provision "reload"
-  config.vm.provision "shell", inline: $script2, privileged: true, powershell_elevated_interactive: true
+  config.vm.provision "shell", inline: $script2
 
   ["vmware_fusion", "vmware_workstation"].each do |provider|
     config.vm.provider provider do |v, override|
