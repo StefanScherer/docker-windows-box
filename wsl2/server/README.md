@@ -25,7 +25,7 @@ wsl -d Ubuntu-20.04 docker run hello-world
 
 ## How to build the Vagrant box
 
-You need a Vagrant box `windows_server_2004` before using the `Vagrantfile`.
+You need a Vagrant box `windows_server_2004` before using the `Vagrantfile`. You need VMware Fusion / Workstation to have nested virtualization.
 
 ```shell
 git clone https://github.com/StefanScherer/packer-windows
@@ -36,3 +36,12 @@ packer build \
   windows_server_2004.json
 vagrant box add windows_server_2004 windows_server_2004_vmware.box
 ```
+
+## Vagrant up
+
+After you have created the Vagrant base box you can boot and provision the VM
+
+```shell
+vagrant up
+```
+
