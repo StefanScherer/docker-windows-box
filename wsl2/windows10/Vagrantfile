@@ -5,23 +5,44 @@ $script = <<SCRIPT
 Write-Host "Enabling WSL 2 feature."
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
 Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -NoRestart
+Write-Host "Enabling Hyper-V and Containers feature."
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
+Enable-WindowsOptionalFeature -Online -FeatureName Containers -All -NoRestart
+. sc.exe config winrm start= delayed-auto
 SCRIPT
 
 $script2 = <<SCRIPT2
-mkdir c:\\distro
-cd c:\\distro
-Write-Host "Downloading Ubuntu 18.04 WSL distro"
-curl.exe -L -o ubuntu1804.appx https://aka.ms/wsl-ubuntu-1804
-tar.exe xvf ubuntu1804.appx
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";C:\\distro", "Machine")
+. sc.exe config winrm start= auto
+
+Write-Host "Downloading Docker Desktop"
+$ExeFile = "$env:USERPROFILE/Downloads/docker-desktop-installer.exe"
+curl.exe -o "$ExeFile" https://download.docker.com/win/stable/Docker%20Desktop%20Installer.exe
+
+Write-Host "Installing Docker Desktop"
+Start-Process -FilePath $ExeFile -ArgumentList install, --quiet -Wait
+
+Write-Host "Installing WSL Linux kernel update"
+curl.exe -o wsl_update_x64.msi https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+Start-Process msiexec.exe -Wait -ArgumentList '/I wsl_update_x64.msi /qn'
+Remove-Item wsl_update_x64.msi
 
 Write-Host "Set WSL default version 2"
 wsl --set-default-version 2
-Write-Host "Now open a shell and run Ubuntu1804.exe"
+
+mkdir c:\\distro
+cd c:\\distro
+Write-Host "Downloading Ubuntu 20.04 WSL distro"
+curl.exe -L -o ubuntu2004.tar.gz https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64-wsl.rootfs.tar.gz
+
+wsl --import Ubuntu20.04 C:\\distro\\ubuntu20.04 ubuntu2004.tar.gz --version 2
+
+Remove-Item ubuntu2004.tar.gz
+
 SCRIPT2
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "windows_10_insider_home"
+#  config.vm.box = "windows_10_insider_home"
+  config.vm.box = "windows_10_pro_de"
 
   config.vm.communicator = "winrm"
 
@@ -52,12 +73,5 @@ Vagrant.configure("2") do |config|
     v.vmx["gui.viewmodeatpoweron"] = "fullscreen"
     v.vmx["gui.lastPoweredViewMode"] = "fullscreen"
     v.enable_vmrun_ip_lookup = false
-  end
-
-  config.vm.provider "virtualbox" do |v|
-    v.gui = true
-    v.memory = "5120"
-    v.cpus = "2"
-    v.linked_clone = true
   end
 end
