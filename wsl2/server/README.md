@@ -42,6 +42,7 @@ vagrant box add windows_server_2004 windows_server_2004_vmware.box
 After you have created the Vagrant base box you can boot and provision the VM
 
 ```shell
+vagrant plugin install vagrant-reload
 vagrant up
 ```
 
