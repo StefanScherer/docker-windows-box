@@ -41,8 +41,7 @@ Remove-Item ubuntu2004.tar.gz
 SCRIPT2
 
 Vagrant.configure("2") do |config|
-#  config.vm.box = "windows_10_insider_home"
-  config.vm.box = "windows_10_pro_de"
+  config.vm.box = "StefanScherer/windows_10"
 
   config.vm.communicator = "winrm"
 
