@@ -8,4 +8,5 @@ vagrant up
 ```
 
 You can start Docker Desktop and use Linux Containers or Windows Containers.
+
 The [Vagrant VMware provider](https://www.vagrantup.com/vmware/index.html) is recommended.
