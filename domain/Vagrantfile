@@ -1,0 +1,112 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "dc" do |cfg|
+    cfg.vm.box = "windows_2016_core"
+    cfg.vm.hostname = "dc"
+
+    # use the plaintext WinRM transport and force it to use basic authentication.
+    # NB this is needed because the default negotiate transport stops working
+    #    after the domain controller is installed.
+    #    see https://groups.google.com/forum/#!topic/vagrant-up/sZantuCM0q4
+    cfg.winrm.transport = :plaintext
+    cfg.winrm.basic_auth_only = true
+
+    cfg.vm.network :private_network, ip: "192.168.36.4", gateway: "192.168.36.1"
+
+    ["vmware_fusion", "vmware_workstation"].each do |provider|
+      cfg.vm.provider provider do |v, override|
+        v.enable_vmrun_ip_lookup = false
+      end
+    end
+
+    cfg.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "192.168.36.4"
+    cfg.vm.provision "shell", path: "scripts/create-domain.ps1", privileged: false, args: "192.168.36.4"
+    cfg.vm.provision "reload"
+    cfg.vm.provision "shell", path: "scripts/fill-ad.ps1", privileged: false
+    cfg.vm.provision "shell", path: "scripts/add-local-intranet-sites.ps1", privileged: false
+
+    ["vmware_fusion", "vmware_workstation", "virtualbox"].each do |provider|
+      cfg.vm.provider provider do |v, override|
+        v.gui = true
+      end
+    end
+    ["vcloud", "virtualbox", "vmware_fusion", "vmware_workstation"].each do |provider|
+      cfg.vm.provider provider do |v, override|
+        v.memory = "1536"
+        v.cpus = "2"
+      end
+    end
+  end
+
+  config.vm.define "Host1" do |cfg|
+    cfg.vm.box = "windows_2016_docker"
+    cfg.vm.hostname = "Host1"
+
+    cfg.vm.communicator = "winrm"
+    cfg.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
+    cfg.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true
+    cfg.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
+    cfg.vm.network :private_network, ip: "192.168.36.5", gateway: "192.168.36.1", dns: "192.168.36.4"
+
+    ["vmware_fusion", "vmware_workstation"].each do |provider|
+      cfg.vm.provider provider do |v, override|
+        v.enable_vmrun_ip_lookup = false
+      end
+    end
+
+    cfg.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "-ip 192.168.36.5 -dns 192.168.36.4"
+    cfg.vm.provision "shell", path: "scripts/join-domain.ps1", privileged: false, args: "-dns 192.168.36.4"
+    cfg.vm.provision "reload"
+    cfg.vm.provision "shell", path: "scripts/add-local-intranet-sites.ps1", privileged: false
+    cfg.vm.provision "shell", path: "scripts/generate-gMSA.ps1", privileged: false
+
+    ["vmware_fusion", "vmware_workstation", "virtualbox"].each do |provider|
+      cfg.vm.provider provider do |v, override|
+        v.gui = true
+      end
+    end
+    ["vcloud", "virtualbox", "vmware_fusion", "vmware_workstation"].each do |provider|
+      cfg.vm.provider provider do |v, override|
+        v.memory = "2048"
+        v.cpus = "2"
+      end
+    end
+  end
+
+  config.vm.define "Host2" do |cfg|
+    cfg.vm.box = "windows_10_15063"
+    cfg.vm.hostname = "Host2"
+
+    cfg.vm.communicator = "winrm"
+    cfg.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
+    cfg.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true
+    cfg.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
+    cfg.vm.network :private_network, ip: "192.168.36.6", gateway: "192.168.36.1", dns: "192.168.36.4"
+
+    ["vmware_fusion", "vmware_workstation"].each do |provider|
+      cfg.vm.provider provider do |v, override|
+        v.enable_vmrun_ip_lookup = false
+      end
+    end
+
+    cfg.vm.provision "shell", path: "scripts/fix-second-network.ps1", privileged: false, args: "-ip 192.168.36.6 -dns 192.168.36.4"
+    cfg.vm.provision "shell", path: "scripts/join-domain.ps1", privileged: false, args: "-dns 192.168.36.4"
+    cfg.vm.provision "reload"
+    cfg.vm.provision "shell", path: "scripts/add-local-intranet-sites.ps1", privileged: false
+
+    ["vmware_fusion", "vmware_workstation", "virtualbox"].each do |provider|
+      cfg.vm.provider provider do |v, override|
+        v.gui = true
+      end
+    end
+    ["vcloud", "virtualbox", "vmware_fusion", "vmware_workstation"].each do |provider|
+      cfg.vm.provider provider do |v, override|
+        v.memory = "2048"
+        v.cpus = "2"
+      end
+    end
+  end
+
+end
